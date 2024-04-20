@@ -14,6 +14,7 @@
 
 
 <!-- register-area -->
+<a href="javascript:history.go(-1)" class="back-arrow"><i class="fa fa-arrow-left arrow-icon"></i></a>
 
 <div class="register-area" style="background-color: rgb(249, 249, 249);"> 
 
@@ -150,5 +151,25 @@
 </div>      
 
 
+
+
+<style>
+
+    .arrow-icon {
+        font-size: 30px; /* Taille de l'icône */
+        width: 50px; /* Largeur de l'icône */
+        height: 50px; /* Hauteur de l'icône */
+        margin-left: 70px;
+        margin-top: 20px;
+    }
+    
+</style>
+    
+<script>
+    document.getElementById('registerModalButton').addEventListener('click', function() {
+        $('#registerModal').modal('show');
+    });
+</script>
+    
 
 @endsection

@@ -5,15 +5,15 @@ function submitForm() {
     var images = $('#images')[0].files;
 
     // Vérifier si les champs obligatoires sont vides
-    if ($('#nombreSalon').val() === '' || $('#nombreChambre').val() === '' || $('#climaVenilo').val() === '' || $('#lieux').val() === '' || $('#securite').val() === '' || $('#packing').val() === '' || $('#terasse').val() === '' || $('#canal').val() === '' || $('#prix').val() === '' || $('#description').val() === '' || $('#negociable').val() === '' || $('#wifi').val() === '' || $('#ptiDejeuner').val() === '' || $('#cuisine').val() === '' || $('#entretien').val() === '' || $('#meuble').val() === '' || images.length === 0) {
-        $('#error-message').show(); // Afficher le message d'erreur
+    if ($('#nombreSalon').val() === '' || $('#nombreChambre').val() === '' ||  $('#prix').val() === '' ||  $('#lieux').val() === '' || images.length === 0) {
+        $('#error-message0').show(); // Afficher le message d'erreur
     
         // Masquer le message d'erreur après 3 secondes
         setTimeout(function() {
-            $('#error-message').hide();
+            $('#error-message0').hide();
         }, 5000);
     } else {
-        $('#error-message').hide(); // Masquer le message d'erreur s'il est déjà affiché
+        $('#error-message0').hide(); // Masquer le message d'erreur s'il est déjà affiché
         // Votre code pour soumettre le formulaire ici
 
         for (var i = 0; i < images.length; i++) {
@@ -60,12 +60,12 @@ function submitForm() {
                     success: function(response) {
                         if (parseInt(response) == 200 || parseInt(response) == 500) {
                             if (parseInt(response) == 500) {
-                                $("#msg50").html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                $("#msg501").html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
                                         <strong>Attention !!!</strong> une erreur s'est produite, veuillez réessayer...
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>`);
                             } else {
-                                $('#msg50').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                $('#msg501').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
                                         Félicitations, votre annonce a été déposée avec succès.
                                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                     </div>`);
@@ -79,7 +79,7 @@ function submitForm() {
                                 window.location = url;
                             }, 5000);
                         } else {
-                            $("#msg50").html(response);
+                            $("#msg501").html(response);
                         }
                     }
                 });
@@ -93,3 +93,19 @@ function submitForm() {
     }
 };
 
+
+function validatePrix(input) {
+    var errorMessage = document.getElementById("error-message2");
+    var prixRegex = /^[0-9]+([.][0-9]+)?$/; // Expression régulière pour les nombres entiers et décimaux
+    
+    if (!prixRegex.test(input.value)) {
+        // Afficher un message d'erreur si le contenu n'est pas un nombre entier ou décimal
+        errorMessage.innerHTML = "Veuillez entrer un nombre entier.";
+        errorMessage.style.display = "block";
+        input.value = ''; // Effacer la saisie incorrecte
+    } else {
+        // Réinitialiser le message d'erreur
+        errorMessage.innerHTML = "";
+        errorMessage.style.display = "none";
+    }
+}

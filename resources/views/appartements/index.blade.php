@@ -39,49 +39,7 @@
 
     
 
-    {{-- <div class="home-lager-shearch"> --}}
-        {{-- <div class="container">
-            <div class="row">
-                <div class="col-md-12 large-search">
-                    <div class="search-form wow pulse">
-                        <form action="" class=" form-inline">
-                            <div class="col-md-12 clear">
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Key word">
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Select your city">
-                                        <option>New york, CA</option>
-                                        <option>Paris</option>
-                                        <option>Casablanca</option>
-                                        <option>Tokyo</option>
-                                        <option>Marraekch</option>
-                                        <option>kyoto , shibua</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Status- </option>
-                                        <option>Rent </option>
-                                        <option>Boy</option>
-                                        <option>used</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 clear">
-                                
-                            </div>
-                            <div class="center">
-                                <input type="submit" value="" class="btn btn-default btn-lg-sheach">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
+    
 
     
     <!-- property area -->
@@ -153,7 +111,6 @@
                                 
                             </form>
                            
-
                             <h5>Liste des appartements disponibles</h5>
 
                             <div class="col-md-12 clear">

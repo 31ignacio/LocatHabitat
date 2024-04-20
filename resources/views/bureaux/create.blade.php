@@ -215,7 +215,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 
-                    <span id="payer"> <kkiapay-widget amount="4907" key="caf3f6e0eacf11ee80ae5bdd91083b6e"
+                    <span id="payer"> <kkiapay-widget amount="6869" key="caf3f6e0eacf11ee80ae5bdd91083b6e"
                             {{-- {# url="<url-vers-votre-logo>" #}  --}} position="center" sandbox="true" data="" method="post"
                             {{-- {# callback="<url-de-redirection-quand-lepaiement-est-reuissi>" #} --}}>
                         </kkiapay-widget>

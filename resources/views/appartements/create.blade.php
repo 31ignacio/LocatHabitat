@@ -54,8 +54,10 @@
                                                 </div>
                                             @endif
 
-                                            <div id="msg50"></div>
-
+                                            
+                                            
+                                                <div id="msg501"></div>
+                        
                                             <div class="row">
                                                 <div class="col-md-6 form-group">
                                                     <label>Nombre de salon</label>
@@ -186,8 +188,9 @@
                                         <div class="row">
                                             <div class="col-md-6 form-group">
                                                 <label>Prix </label>
-                                                <input name="prix" id="prix" type="number" min="0" class="form-control">
-                                            </div>
+                                                <input type="text" name="prix" id="prix" class="form-control" oninput="validatePrix(this)">
+
+                                                <div id="error-message2" class="error-message text-danger"></div>                                            </div>
                                             <div class="col-md-6 form-group">
                                                 <label>Le prix est négociable ?</label>
                                                 <select name="negociable" id="negociable" class="form-control">
@@ -225,7 +228,10 @@
                                     <!--  End step 3 -->
         
         
-                                    <div class="tab-pane" id="step4">                                        
+                                    <div class="tab-pane" id="step4">  
+                                        <div id="error-message0" class="alert alert-warning text-center" style="display: none;">
+                                            Veuillez remplir tous les champs.
+                                        </div>                                      
                                         <h4 class="info-text"> Terminé et Soumettre </h4>
                                         <div class="row">  
                                             <div class="col-sm-12">
@@ -296,7 +302,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 
                     <span id="payer"> <kkiapay-widget amount="9814" key="caf3f6e0eacf11ee80ae5bdd91083b6e"
-                            {{-- {# url="<url-vers-votre-logo>" #}  --}} position="center" sandbox="true" data="" method="post"
+                            {{-- {# url="<url-vers-votre-logo>" #}  --}} position="left" sandbox="true" data="" method="post"
                             {{-- {# callback="<url-de-redirection-quand-lepaiement-est-reuissi>" #} --}}>
                         </kkiapay-widget>
                     </span>
