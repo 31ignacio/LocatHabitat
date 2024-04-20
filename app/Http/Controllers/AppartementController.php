@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 class AppartementController extends Controller
 {
     //
+    public function index(){
+
+        $appartements = Appartement::latest()->paginate(3);
+
+        //dd($bureaux);
+
+
+        return view('appartements.index', compact('appartements'));
+    }
 
     //function qui appel le formulaire de création
     public function appartement(){
@@ -17,7 +26,7 @@ class AppartementController extends Controller
         return view('appartements.create');
     }
 
-     //l'enregistremen du vehicules
+     //l'enregistremen des appartements
      public function appartementStore(Request $request){
         //dd($request);
  
@@ -83,5 +92,63 @@ class AppartementController extends Controller
          }
      }
  
+     //Détail appartement
+    public function appartementDetail($appartement){
+
+         //dd($vehicule);
+         $appartements = Appartement::where('id', $appartement)->first();
+
+         // Sélectionner aléatoirement quatre marques distinctes
+          $lieux = Appartement::distinct('lieux')
+          ->inRandomOrder()
+          ->limit(5)
+          ->pluck('lieux');
+  
+          // Récupérer aléatoirement un véhicule pour chaque marque sélectionnée
+          $appartementSimilaires = collect([]);
+          foreach ($lieux as $marque) {
+          $appartement = Appartement::where('lieux', $marque)
+              ->inRandomOrder()
+              ->first();
+          $appartementSimilaires->push($appartement);
+          }
+  
+          return view('appartements.detail',compact('appartements','appartementSimilaires'));
+    }
+
+
+    public function appartementEntreprise(){
+
+
+        $user= auth()->user()->id;
+        $entreprises= Entreprise::where('user_id', $user)->first();
+        $entreprise= $entreprises->id;
+        $appartements= Appartement::where('entreprise_id', $entreprise)->latest()->paginate(3);
+
+        return view('Enreprises.annonce', compact('appartements'));
+    }
+
+    public function searchAppartement(Request $request)
+    {
+        $query = Appartement::query();
+
+        if ($request->lieux) {
+            $query->where('lieux', 'like', '%' . $request->lieux . '%');
+        }
+
+        if ($request->prix_min) {
+            $query->where('prix', '>=', $request->prix_min);
+        }
+
+        if ($request->prix_max) {
+            $query->where('prix', '<=', $request->prix_max);
+        }
+
+        $appartements = $query->latest()->paginate(3);
+
+        return view('appartements.index', compact('appartements'));
+        // return view('au', compact('results'));
+    }
+    
 
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\BureauxController;
+use App\Http\Controllers\ContacteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VehiculeController;
@@ -54,6 +55,29 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
 // Profil
     Route::get('/profil', [ProfilController::class, 'profilUser'])->name('user.profil');
     Route::post('/update/profil/{entreprise}', [ProfilController::class, 'updateProfil'])->name('profil.update');
+
+    Route::post('/change-password', [ProfilController::class, 'update'])->name('password.update');
+
+//end
+
+//contacte
+ Route::get('/contacte', [ContacteController::class, 'contacte'])->name('contacte.create');
+
+
+//end
+
+//footer
+  Route::get('/footer', [ContacteController::class, 'footer'])->name('footer');
+//end
+
+//FAQ
+    Route::get('/faq', [ContacteController::class, 'faq'])->name('faq.create');
+
+//end
+
+//Tarification
+    Route::get('/tarification', [ContacteController::class, 'tarification'])->name('tarification.create');
+
 //end
 
 //vehicules
@@ -72,12 +96,14 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
 
     Route::post('/vehicules/{id}/update', [VehiculeController::class, 'vehiculeUpdate'])->name('vehicule.update');
 
+    Route::get('/search/Vehicule', [VehiculeController::class, 'searchVehicule'])->name('search.vehicule');
+
 //end
 
 
 // Bureaux
     //liste bureau
-    Route::get('[bureaux]/aa', [BureauxController::class, 'index'])->name('bureaux.index');
+    Route::get('bureaux/liste', [BureauxController::class, 'index'])->name('bureaux.index');
     //Détail bureau
     // Route::get('/{bureau}', [BureauxController::class, 'bureauDetail'])->name('bureaux.detail');
 
@@ -85,21 +111,36 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
     Route::get('bureaux/creer', [BureauxController::class, 'bureaux'])->name('bureaux');
     Route::post('/bureauxStore', [BureauxController::class, 'burauxStore'])->name('bureaux.store');
 
-    //detail d'un vehicule
+    //detail d'un bureau
     Route::get('bureaux/{bureau}', [BureauxController::class, 'bureauDetail'])->name('bureaux.detail');
-    //Recuperer les vehicules d'une entreprise
+    //Recuperer les bureaux d'une entreprise
     Route::get('bureau/Entreprise', [BureauxController::class, 'bureauEntreprise'])->name('bureaux.entreprise');
-
+    //Modifier un bureau
     Route::post('/bureaux/{id}/update', [BureauxController::class, 'bureauUpdate'])->name('bureaux.update');
+
+    Route::get('/search/bureaux', [BureauxController::class, 'searchBureaux'])->name('search.bureaux');
+
+
 //end
 
 //Appartement
 
-    //Bureaux création
+    //liste appartement(tout)
+    Route::get('appartement/liste', [AppartementController::class, 'index'])->name('appartement.index');
+    
+    //Appartement création
     Route::get('appartement/creer', [AppartementController::class, 'appartement'])->name('appartement');
     Route::post('/appartementStore', [AppartementController::class, 'appartementStore'])->name('appartement.store');
 
+    //detail d'un appartement
+    Route::get('appartement/{appartement}', [AppartementController::class, 'appartementDetail'])->name('appartement.detail');
+    
+    //Recuperer les appartement d'une entreprise
+    Route::get('appartement/Entreprise', [AppartementController::class, 'appartementEntreprise'])->name('appartement.entreprise');
 
+    //Modifier un appartement
+    Route::post('/appartement/{id}/update', [AppartementController::class, 'appartementUpdate'])->name('appartement.update');
 
+    Route::get('/search/appartements', [AppartementController::class, 'searchAppartement'])->name('search.appartement');
 
 //end

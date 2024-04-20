@@ -16,7 +16,7 @@ class UserAuthController extends Controller
 
     public function index(){
 
-        $vehicules = Vehicule::paginate(4);
+        $vehicules = Vehicule::latest()->paginate(3);
 
         //dd($vehicules);
 
@@ -43,7 +43,9 @@ class UserAuthController extends Controller
             'quatier'=>'required',
             'telephone'=>'required',
             'email'=>'required|unique:users,email',
-            'password'=>'required|min:6'
+            'password' => 'required|confirmed|min:6',
+            'cfpassword' => 'required'
+
         ], [
             'entreprise.required'=>'Le nom de votre entreprise est requis',
             'representant.required'=>'Le nom de votre représentant est requis',
@@ -54,7 +56,10 @@ class UserAuthController extends Controller
             'email.required'=>'Votre email est requis',
             'email.unique'=>'Cette adresse mail est déjà prise', 
             'password.required'=>'Le mot de passe est requis',
-            'password.min'=> 'Le mot de passe doit avoir au moins 6 caractères'
+            'password.min'=> 'Le mot de passe doit avoir au moins 6 caractères',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'cfpassword.required' => 'La confirmation du mot de passe est requise.'
+
         ]);
 
 

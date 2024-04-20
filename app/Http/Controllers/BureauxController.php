@@ -13,7 +13,7 @@ class BureauxController extends Controller
     //
     public function index(){
 
-        $bureaux = Bureau::paginate(4);
+        $bureaux = Bureau::latest()->paginate(3);
 
         //dd($bureaux);
 
@@ -116,7 +116,7 @@ class BureauxController extends Controller
         $user= auth()->user()->id;
         $entreprises= Entreprise::where('user_id', $user)->first();
         $entreprise= $entreprises->id;
-        $bureaux= Bureau::where('entreprise_id', $entreprise)->get();
+        $bureaux= Bureau::where('entreprise_id', $entreprise)->latest()->paginate(3);
 
         return view('bureaux.annoncePersonnelle', compact('bureaux'));
 
@@ -170,6 +170,28 @@ class BureauxController extends Controller
         return redirect()->back()->with('success', 'Les informations du bureau ont été mises à jour avec succès.');
 
 
+    }
+
+    public function searchBureaux(Request $request)
+    {
+        $query = Bureau::query();
+
+        if ($request->lieux) {
+            $query->where('lieux', 'like', '%' . $request->lieux . '%');
+        }
+
+        if ($request->prix_min) {
+            $query->where('prix', '>=', $request->prix_min);
+        }
+
+        if ($request->prix_max) {
+            $query->where('prix', '<=', $request->prix_max);
+        }
+
+        $bureaux = $query->latest()->paginate(3);
+
+        return view('bureaux.index', compact('bureaux'));
+        // return view('au', compact('results'));
     }
     
 

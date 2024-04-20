@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appartement;
 use App\Models\Entreprise;
 use App\Models\Vehicule;
 use Exception;
@@ -81,17 +82,20 @@ class VehiculeController extends Controller
 
     public function EntrepriseAnnonce(){
 
+        $user= auth()->user()->id;
+        $entreprises= Entreprise::where('user_id', $user)->first();
+        $entreprise= $entreprises->id;
+        $appartements= Appartement::where('entreprise_id', $entreprise)->latest()->paginate(3);
 
-
-        return view('Entreprises.annonce');
+        return view('Entreprises.annonce',compact('appartements'));
     }
 
     public function VehiculeEntreprise(){
  
-            $user= auth()->user()->id;
-            $entreprises= Entreprise::where('user_id', $user)->first();
-            $entreprise= $entreprises->id;
-            $vehicules= Vehicule::where('entreprise_id', $entreprise)->get();
+        $user= auth()->user()->id;
+        $entreprises= Entreprise::where('user_id', $user)->first();
+        $entreprise= $entreprises->id;
+        $vehicules= Vehicule::where('entreprise_id', $entreprise)->latest()->paginate(3);
 
 
 
@@ -164,4 +168,27 @@ class VehiculeController extends Controller
 
 
     }
+
+    public function searchVehicule(Request $request)
+    {
+        $query = Vehicule::query();
+
+        if ($request->marque) {
+            $query->where('marque', 'like', '%' . $request->marque . '%');
+        }
+
+        if ($request->prix_min) {
+            $query->where('prix', '>=', $request->prix_min);
+        }
+
+        if ($request->prix_max) {
+            $query->where('prix', '<=', $request->prix_max);
+        }
+
+        $vehicules = $query->latest()->paginate(3);
+
+        return view('auth.users.index', compact('vehicules'));
+        // return view('au', compact('results'));
+    }
+
 }

@@ -38,189 +38,19 @@
     </div> 
 
     
-    {{-- 
-    <div class="home-lager-shearch">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 large-search">
-                    <div class="search-form wow pulse">
-                        <form action="" class=" form-inline">
-                            <div class="col-md-12 clear">
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Key word">
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Select your city">
-                                        <option>New york, CA</option>
-                                        <option>Paris</option>
-                                        <option>Casablanca</option>
-                                        <option>Tokyo</option>
-                                        <option>Marraekch</option>
-                                        <option>kyoto , shibua</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Status- </option>
-                                        <option>Rent </option>
-                                        <option>Boy</option>
-                                        <option>used</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 clear"> --}}
-                                {{-- <div class="search-row">   
-
-                                <div class="col-sm-3">
-                                    <label for="price-range">Price range ($):</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[0,450]" id="price-range" ><br />
-                                    <b class="pull-left color">2000$</b> 
-                                    <b class="pull-right color">100000$</b>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Property geo (m2) :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[50,450]" id="property-geo" ><br />
-                                    <b class="pull-left color">40m</b> 
-                                    <b class="pull-right color">12000m</b>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <label for="price-range">Min baths :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[250,450]" id="min-baths" ><br />
-                                    <b class="pull-left color">1</b> 
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Min bed :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[250,450]" id="min-bed" ><br />
-                                    <b class="pull-left color">1</b> 
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  --> 
-
-                            </div> --}}
-
-                                {{-- <div class="search-row">  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Fire Place(3100)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Dual Sinks(500)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Hurricane Shutters(99)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Swimming Pool(1190)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 2 Stories(4600)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Emergency Exit(200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Laundry Room(10073)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Jog Path(1503)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 26' Ceilings(1200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-                            </div>    --}}
-                            {{-- </div>
-                            <div class="center">
-                                <input type="submit" value="" class="btn btn-default btn-lg-sheach">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
+    
     
     <!-- property area -->
     <div class="content-area recent-property" style="padding-bottom: 60px; background-color: rgb(252, 252, 252);">
         <div class="container">
             <div class="row">
-                <div class="col-md-12  padding-top-40 properties-page">
-                    <div class="col-md-12 ">
+                <div class="col-md-12 col-sm-6 padding-top-40 properties-page">
+                    <div class="col-md-12 col-sm-6 ">
                         <div class="col-xs-10 page-subheader sorting pl0">
 
                             <ul class="sort-by-list">
                                 <li class="">
-                                    <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
+                                    <a href="{{ route('appartement.index') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         Appartements <i class="fa fa-sort-amount-asc"></i>
                                     </a>
@@ -233,28 +63,13 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="" class="order_by_date" data-orderby="property_date"
+                                    <a href="{{ route('home') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         Véhicules <i class="fa fa-sort-amount-asc"></i>
                                     </a>
                                 </li>
                             </ul><!--/ .sort-by-list-->
 
-                            {{-- <div class="items-per-page">
-                                <label for="items_per_page"><b>Property per page :</b></label>
-                                <div class="sel">
-                                    <select id="items_per_page" name="per_page">
-                                        <option value="3">3</option>
-                                        <option value="6">6</option>
-                                        <option value="9">9</option>
-                                        <option selected="selected" value="12">12</option>
-                                        <option value="15">15</option>
-                                        <option value="30">30</option>
-                                        <option value="45">45</option>
-                                        <option value="60">60</option>
-                                    </select>
-                                </div><!--/ .sel-->
-                            </div><!--/ .items-per-page--> --}}
                         </div>
 
                         <div class="col-xs-2 layout-switcher">
@@ -263,11 +78,10 @@
                         </div><!--/ .layout-switcher-->
                     </div>
 
-                    <div class="col-md-12 ">
+                    <div class="col-md-12">
                         <div id="list-type" class="proerty-th">
                             
 
-                            <h4>Liste des véhicules disponibles</h4>
 
                             <div class="col-md-12 clear">
                                 @if(Session::get('success'))
@@ -275,40 +89,38 @@
                                         {{Session::get('success')}}
                                     </div>
                                 @endif
-        
-                                {{-- @foreach ($vehicules as $vehicule)
-                                    <div class="col-sm-6 col-md-4 p0" style="margin-bottom: 20px;">
-                                        <div class="box-two proerty-item" style="margin-right: 20px; margin-bottom: 20px;">
-                                            <!-- Ajouter une marge droite et basse -->
-                                            <div class="item-thumb">
-                                                @php
-                                                    $vehicule_images = explode('|', $vehicule->images);
-                                                @endphp
-                                                @if (count($vehicule_images) > 0)
-                                                    <a href="{{ route('vehicule.detail', $vehicule->id) }}" title="Cliquer sur l'image pour plus de détails">
-                                                        <img src="{{ URL::to($vehicule_images[0]) }}" class="vehicule-image">
-                                                    </a>
-                                                @endif
+                                    <br>
+                                <form action="{{ route('search.vehicule') }}" method="GET">
+
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="marque" name="marque" placeholder="Marque du véhicule">
                                             </div>
-                                            
-        
-                                            <div class="item-entry overflow">
-                                                <h5><a href="{{ route('vehicule.detail', $vehicule->id) }}"><span
-                                                            style="display: block; text-align: center;">{{ $vehicule->marque }}</span></a>
-                                                </h5>
-                                                <div class="dot-hr"></div>
-                                                <span class="pull-left"><b> Climatiseur : </b> {{ $vehicule->climatiseur }}</span>
-                                                <span class="proerty-price pull-right"><b class="badge badge-primary">
-                                                        {{ $vehicule->prix }} FCFA </b></span>
-                                                <span class="pull-left"><b> Chauffeur : </b> {{ $vehicule->chauffeur }}</span>
-                                                <span class="pull-left"><b> Caburant : </b> {{ $vehicule->caburation }}</span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="prix_min" name="prix_min" placeholder="Prix minimum">
                                             </div>
-                                            
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="prix_max" name="prix_max" placeholder="Prix maximum">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-primary">Rechercher</button>
                                         </div>
                                     </div>
-                                @endforeach --}}
+                                    
+                                </form>
+                                
+                                <h5>Liste des véhicules disponibles</h5>
+
                                 @foreach ($vehicules as $vehicule)
-                                <div class="col-sm-6 col-md-3 p0">
+                                <div class="col-sm-6 col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb position-relative">
                                             @php
@@ -346,9 +158,9 @@
                         <div class="pull-right">
                             <div class="pagination">
                                 {{-- LA PAGINATION --}}
-        <div style="display: flex; justify-content: center;" class="mb-3 mt-3">
-            {{$vehicules->links()}}
-        </div>
+                                <div style="display: flex; justify-content: center;" class="mb-3 mt-3">
+                                    {{$vehicules->links()}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -358,16 +170,15 @@
     </div>
 
 
-    {{-- Css des bouton --}}
+    {{-- Css des bouton pour enregistrement --}}
     <style>
 
-/* CSS */
-.item-thumb img {
-    max-width: 100%; /* Limite la largeur de l'image à 100% de la largeur du conteneur */
-    max-height: 100%; /* Limite la hauteur de l'image à 100% de la hauteur du conteneur */
-    width: auto; /* Ajuste automatiquement la largeur de l'image pour conserver ses proportions */
-    height: auto; /* Ajuste automatiquement la hauteur de l'image pour conserver ses proportions */
-}
+            .item-thumb img {
+
+            width: 100px;
+            height: 50px;
+            }
+
 
 
         .button-container {

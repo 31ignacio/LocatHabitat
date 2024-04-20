@@ -37,7 +37,7 @@
                                 @if (count($bureau_images) > 0)
                                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                                     @foreach ($bureau_images as $image)
-                                    <li data-thumb="{{ asset('assets/img/property-1/property1.jpg') }}"> 
+                                    <li data-thumb="{{ URL::to($image) }}"> 
                                         <img src="{{ URL::to($image) }}" />
                                     </li>
                                     @endforeach
@@ -230,6 +230,13 @@
                                     </ul>
                                 </div>
 
+                                <div style=" margin-bottom: 20px;">
+                                    <p>Vous souhaitez obtenir plus d'informations sur ce bureau  ?</p>
+                                    <button class="call-button" onclick="window.location.href = 'tel:{{ $bureaux->entreprise->telephone }}';"><i class="fa fa-phone"></i> Appeler {{ $bureaux->entreprise->telephone }}</button>
+                                    <br><br>
+                                    <a href="https://api.whatsapp.com/send?phone={{ $bureaux->entreprise->telephone }}" target="_blank" style="background-color: #25d366; color: #ffffff; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;"><i class="fa fa-whatsapp"></i> Dicuter via WhatsApp</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -273,12 +280,7 @@
 
                 </aside><br>
 
-                <div style=" margin-bottom: 20px;">
-                    <p>Vous souhaitez obtenir plus d'informations sur ce véhicule ?</p>
-                    <button class="call-button" onclick="window.location.href = 'tel:{{ $bureaux->entreprise->telephone }}';"><i class="fa fa-phone"></i> Appeler {{ $bureaux->entreprise->entreprise }}</button>
-                    <br><br>
-                    <a href="https://api.whatsapp.com/send?phone={{ $bureaux->entreprise->telephone }}" target="_blank" style="background-color: #25d366; color: #ffffff; padding: 10px 20px; border-radius: 5px; text-decoration: none; display: inline-block;"><i class="fa fa-whatsapp"></i> Cliquer pour contacter le propriétaire via WhatsApp</a>
-                </div>
+                
 
             </div>
         </div>
@@ -290,7 +292,7 @@
 
 <style>
     .call-button {
-    background-color: #FFA600; /* Couleur de fond */
+    background-color: #000000; /* Couleur de fond */
     color: #fff; /* Couleur du texte */
     border: none; /* Suppression des bordures */
     border-radius: 5px; /* Coins arrondis */

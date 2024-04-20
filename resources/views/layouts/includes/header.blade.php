@@ -47,7 +47,31 @@
                 
             <div class="button navbar-right">
                 <a href="{{route('user.login')}}" class=" btn navbar-btn nav-button wow bounceInRight login">Connexion</a>
-                <a href="{{route('user.registerEntreprise')}}" class="btn navbar-btn nav-button wow fadeInRight">Inscription</a>
+                {{-- <a href="{{route('user.registerEntreprise')}}" class="btn navbar-btn nav-button wow fadeInRight">Inscription</a> --}}
+                <a href="#" id="registerModalButton" class="btn navbar-btn nav-button wow fadeInRight">Inscription</a>
+
+                <!-- Modal -->
+                <div id="registerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title text-center" id="registerModalLabel">Inscription</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>L'inscription est réservée aux entreprises désireuses de publier des biens immobiliers tels que des voitures, des appartements, des bureaux. Si vous êtes un client utilisateur, vous pouvez parcourir notre page d'accueil pour choisir un bien immobilier et entrer en contact directement avec le propriétaire.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <a href="{{ route('user.registerEntreprise') }}" class="btn btn-primary">Continuer</a>
+                                <a href="#" type="button" class="btn btn-secondary " data-dismiss="modal">Retour</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             @endguest
@@ -61,7 +85,7 @@
                 {{-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li> --}}
                 
 
-                <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Contacte</a></li>
+                <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('contacte.create') }}">Contacte</a></li>
 
                 @auth
                     
@@ -85,4 +109,11 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<script>
+    document.getElementById('registerModalButton').addEventListener('click', function() {
+        $('#registerModal').modal('show');
+    });
+</script>
+
 <!-- End of nav bar -->

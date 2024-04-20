@@ -42,7 +42,11 @@
                             </div>
                         @endif
 
-                        <div id="msg50"></div>
+                        <div id="error-message" class="alert alert-warning text-center" style="display: none;">
+                            Veuillez remplir tous les champs.
+                        </div>
+
+                        <div id="msg500"></div>
 
 
                         <div class="clear">
@@ -74,7 +78,7 @@
                             <div class="col-sm-6 padding-top-25">
 
                                 <div class="form-group">
-                                    <label>Adresse</label>
+                                    <label>Ville / Quartier</label>
                                     <input name="lieux" id="lieux" type="text"
                                         class="form-control">
 
@@ -144,13 +148,13 @@
 
                                 <div class="form-group">
                                     <label> Prix</label>
-                                    <input name="prix" id="prix" type="number" min="0" class="form-control">
-                                </div>
+                                    <input type="text" name="prix" id="prix" class="form-control" oninput="validatePrix(this)">
+                                    <div id="error-message2" class="error-message text-danger"></div>                                </div>
 
                                 <div class="form-group">
                                     <label>Image(<span style="font-size: 10px;">vous puvez ajouter plusieurs images à la
                                             fois</span>)</label>
-                                    <input name="images[]" id="images" type="file" class="form-control" multiple>
+                                    <input name="images[]" id="images" type="file" accept="image/*" class="form-control" multiple>
                                 </div>
                             </div>
 
@@ -205,7 +209,7 @@
                 <div class="modal-body">
 
                     <p> Frais de dépôt d'annonce <b class="badge rounded-pill bg-success"><span style="color: white;">
-                                5.000 FCFA </span></b></p>
+                                7.000 FCFA </span></b></p>
                     <span style="color:rgb(255, 0, 0);"><b>Cette somme est non remboursable</b></span>
                 </div>
                 <div class="modal-footer">

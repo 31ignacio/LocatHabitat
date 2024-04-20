@@ -118,6 +118,10 @@
                             <div class="form-group col-md-6">
                                 <label for="">Confirmer mot de passe</label>
                                 <input type="password" class="form-control" name="cfpassword">
+
+                                @error('cfpassword')
+                                    <div class="text-danger">{{$message}}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">

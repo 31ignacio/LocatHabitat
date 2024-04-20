@@ -1,17 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    {{-- 
-    @php
-        $image= DB::table('vehicules')->where('id',2)->first();
-        $images = explode('|', $image->images);
-    @endphp
-
-    @forelse ($images as $item )
-        <img src="{{ URL::to($item) }}" alt="" style="height: 100px;">
-    @empty
-        
-    @endforelse --}}
+    
     <div class="page-head">
         <div class="container">
             <div class="row">
@@ -28,7 +18,7 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-3 p0 padding-top-40">
+                 {{-- <div class="col-md-3 p0 padding-top-40">
                     <div class="blog-asside-right pr0">
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                             <div class="panel-heading">
@@ -262,26 +252,26 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  --}}
 
-                <div class="col-md-9  pr0 padding-top-40 properties-page">
+                <div class="col-md-12  pr0 padding-top-40 properties-page">
                     <div class="col-md-12 clear">
                         <div class="col-xs-10 page-subheader sorting pl0">
                             <ul class="sort-by-list">
-                                <li class="active">
-                                    <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
+                                <li class="">
+                                    <a href="{{ route('entreprise.annonce') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         APPARTEMENTS <i class="fa fa-sort-amount-asc"></i>
                                     </a>
                                 </li>
-                                <li class="active">
+                                <li class="">
                                     <a href="{{ route('bureaux.entreprise') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         BUREAUX <i class="fa fa-sort-amount-asc"></i>
                                     </a>
                                 </li>
 
-                                <li class="active">
+                                <li class="{{ route('vehicule.entreprise') }}">
                                     <a href="" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         VEHICULES <i class="fa fa-sort-amount-asc"></i>
@@ -289,157 +279,155 @@
                                 </li>
                             </ul><!--/ .sort-by-list-->
 
-
                         </div>
-
-                        <div class="col-xs-2 layout-switcher">
-                            <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i> </a>
-                            <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i> </a>
-                        </div><!--/ .layout-switcher-->
                     </div>
 
-                    <h4 >Mes véhicules</h4>
                     <div class="col-md-12 clear">
-                        @if(Session::get('success'))
-                            <div class="alert alert-success">
-                                {{Session::get('success')}}
-                            </div>
-                        @endif
+                        <div id="list-type" class="proerty-th">
 
-                        @foreach ($vehicules as $vehicule)
-                            <div class="col-sm-6 col-md-4 p0" style="margin-bottom: 20px;">
-                                <div class="box-two proerty-item" style="margin-right: 20px; margin-bottom: 20px;">
-                                    <!-- Ajouter une marge droite et basse -->
-                                    <div class="item-thumb">
-                                        <!-- Afficher l'image spécifique au véhicule -->
-                                        @php
-                                            $vehicule_images = explode('|', $vehicule->images);
-                                        @endphp
-                                        @if (count($vehicule_images) > 0)
-                                            <a href="{{ route('vehicule.detail', $vehicule->id) }}"
-                                                title="Cliquer sur l'image pour plus de détails"><img
-                                                    src="{{ URL::to($vehicule_images[0]) }}"></a>
-                                        @endif
-                                    </div>
+                            <h5 >Mes véhicules</h5>
 
-                                    <div class="item-entry overflow">
-                                        <h5><a href="{{ route('vehicule.detail', $vehicule->id) }}"><span
-                                                    style="display: block; text-align: center;">{{ $vehicule->marque }}</span></a>
-                                        </h5>
-                                        <div class="dot-hr"></div>
-                                        <span class="pull-left"><b> Climatiseur : </b> {{ $vehicule->climatiseur }}</span>
-                                        <span class="proerty-price pull-right"><b class="badge badge-primary">
-                                                {{ $vehicule->prix }} FCFA </b></span>
-                                        <span class="pull-left"><b> Chauffeur : </b> {{ $vehicule->chauffeur }}</span>
-                                        <span class="pull-left"><b> Caburant : </b> {{ $vehicule->caburation }}</span>
-                                    </div><br>
-                                    <button class="btn btn-warning" data-toggle="modal"
-                                        data-target="#editModal{{ $vehicule->id }}">Modifier l'annonce</button>
+                            @if(Session::get('success'))
+                                <div class="alert alert-success">
+                                    {{Session::get('success')}}
                                 </div>
-                            </div>
+                            @endif
 
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="editModal{{ $vehicule->id }}" tabindex="-1" role="dialog"
-                                aria-labelledby="editModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="editModalLabel">Modifier les informations du
-                                                véhicule</h5>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
+                            @foreach ($vehicules as $vehicule)
+                                <div class="col-sm-6 col-md-4 p0">
+                                    <div class="box-two proerty-item" style="margin-right: 20px; margin-bottom: 20px;">
+                                        <!-- Ajouter une marge droite et basse -->
+                                        <div class="item-thumb">
+                                            <!-- Afficher l'image spécifique au véhicule -->
+                                            @php
+                                                $vehicule_images = explode('|', $vehicule->images);
+                                            @endphp
+                                            @if (count($vehicule_images) > 0)
+                                                <a href="{{ route('vehicule.detail', $vehicule->id) }}"
+                                                    title="Cliquer sur l'image pour plus de détails"><img
+                                                        src="{{ URL::to($vehicule_images[0]) }}"></a>
+                                            @endif
                                         </div>
-                                        <!-- Inside the modal body -->
-                                        <div class="modal-body">
-                                            <!-- Your form inputs for editing vehicle information here -->
-                                            <form action="{{ route('vehicule.update', $vehicule->id) }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <!-- Input fields for vehicle information -->
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="marque">Marque :</label>
-                                                        <input type="text" class="form-control" id="marque"
-                                                            name="marque" value="{{ $vehicule->marque }}">
+
+                                        <div class="item-entry overflow">
+                                            <h5><a href="{{ route('vehicule.detail', $vehicule->id) }}"><span
+                                                        style="display: block; text-align: center;">{{ $vehicule->marque }}</span></a>
+                                            </h5>
+                                            <div class="dot-hr"></div>
+                                            <span class="pull-left"><b> Climatiseur : </b> {{ $vehicule->climatiseur }}</span>
+                                            <span class="proerty-price pull-right"><b class="badge badge-primary">
+                                                    {{ $vehicule->prix }} FCFA </b></span>
+                                            <span class="pull-left"><b> Chauffeur : </b> {{ $vehicule->chauffeur }}</span>
+                                            <span class="pull-left"><b> Caburant : </b> {{ $vehicule->caburation }}</span>
+                                        </div><br>
+                                        <button class="btn btn-warning" data-toggle="modal"
+                                            data-target="#editModal{{ $vehicule->id }}">Modifier l'annonce</button>
+                                    </div>
+                                </div>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="editModal{{ $vehicule->id }}" tabindex="-1" role="dialog"
+                                    aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editModalLabel">Modifier les informations du
+                                                    véhicule</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <!-- Inside the modal body -->
+                                            <div class="modal-body">
+                                                <!-- Your form inputs for editing vehicle information here -->
+                                                <form action="{{ route('vehicule.update', $vehicule->id) }}" method="POST"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <!-- Input fields for vehicle information -->
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="marque">Marque :</label>
+                                                            <input type="text" class="form-control" id="marque"
+                                                                name="marque" value="{{ $vehicule->marque }}">
+                                                        </div>
+
+                                                        <div class="form-group col-md-6">
+                                                            <label for="prix">Prix :</label>
+                                                            <input type="number" class="form-control" id="prix"
+                                                                name="prix" value="{{ $vehicule->prix }}">
+                                                        </div>
+                                                        
+
                                                     </div>
 
-                                                    <div class="form-group col-md-6">
-                                                        <label for="prix">Prix :</label>
-                                                        <input type="number" class="form-control" id="prix"
-                                                            name="prix" value="{{ $vehicule->prix }}">
-                                                    </div>
-                                                    
-
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="climatiseur">Climatiseur :</label>
-                                                        <select class="form-control" id="climatiseur" name="climatiseur">
-                                                            <option value="Oui"
-                                                                {{ $vehicule->climatiseur === 'Oui' ? 'selected' : '' }}>
-                                                                Oui</option>
-                                                            <option value="Non"
-                                                                {{ $vehicule->climatiseur === 'Non' ? 'selected' : '' }}>
-                                                                Non</option>
-                                                            <!-- Add more options as needed -->
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="caburation">Caburation :</label>
-                                                        <select class="form-control" id="caburation" name="caburation">
-                                                            <option value="A la charge du client"
-                                                                {{ $vehicule->caburation === 'A la charge du client' ? 'selected' : '' }}>
-                                                                A la charge du client</option>
-                                                            <option value="A notre charge"
-                                                                {{ $vehicule->caburation === 'A notre charge' ? 'selected' : '' }}>
-                                                                A notre charge</option>
-                                                            <!-- Add more options as needed -->
-                                                        </select>
-                                                    </div>
-                                                    
-
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="form-group col-md-6">
-                                                        <label for="chauffeur">Chauffeur :</label>
-                                                        <select class="form-control" id="chauffeur" name="chauffeur">
-                                                            <option value="Oui"
-                                                                {{ $vehicule->chauffeur === 'Oui' ? 'selected' : '' }}>
-                                                                Oui</option>
-                                                            <option value="Non"
-                                                                {{ $vehicule->chauffeur === 'Non' ? 'selected' : '' }}>
-                                                                Non</option>
-                                                            <option value="Au choix"
-                                                                {{ $vehicule->chauffeur === 'Au choix' ? 'selected' : '' }}>
-                                                                Au choix</option>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="climatiseur">Climatiseur :</label>
+                                                            <select class="form-control" id="climatiseur" name="climatiseur">
+                                                                <option value="Oui"
+                                                                    {{ $vehicule->climatiseur === 'Oui' ? 'selected' : '' }}>
+                                                                    Oui</option>
+                                                                <option value="Non"
+                                                                    {{ $vehicule->climatiseur === 'Non' ? 'selected' : '' }}>
+                                                                    Non</option>
+                                                                <!-- Add more options as needed -->
                                                             </select>
-                                                    </div>
-                                                    <div class="form-group col-md-6">
-                                                        <label for="images">Images :</label>
-                                                        <input type="file" class="form-control" id="images"
-                                                            name="images[]" multiple>
-                                                    </div>
-                                                    
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="caburation">Caburation :</label>
+                                                            <select class="form-control" id="caburation" name="caburation">
+                                                                <option value="A la charge du client"
+                                                                    {{ $vehicule->caburation === 'A la charge du client' ? 'selected' : '' }}>
+                                                                    A la charge du client</option>
+                                                                <option value="A notre charge"
+                                                                    {{ $vehicule->caburation === 'A notre charge' ? 'selected' : '' }}>
+                                                                    A notre charge</option>
+                                                                <!-- Add more options as needed -->
+                                                            </select>
+                                                        </div>
+                                                        
 
-                                                </div>
-                                                
-                                                <div class="modal-footer">
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="form-group col-md-6">
+                                                            <label for="chauffeur">Chauffeur :</label>
+                                                            <select class="form-control" id="chauffeur" name="chauffeur">
+                                                                <option value="Oui"
+                                                                    {{ $vehicule->chauffeur === 'Oui' ? 'selected' : '' }}>
+                                                                    Oui</option>
+                                                                <option value="Non"
+                                                                    {{ $vehicule->chauffeur === 'Non' ? 'selected' : '' }}>
+                                                                    Non</option>
+                                                                <option value="Au choix"
+                                                                    {{ $vehicule->chauffeur === 'Au choix' ? 'selected' : '' }}>
+                                                                    Au choix</option>
+                                                                </select>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label for="images">Images :</label>
+                                                            <input type="file" class="form-control" id="images"
+                                                                name="images[]" multiple>
+                                                        </div>
+                                                        
+
+                                                    </div>
                                                     
-                                                    <button type="submit" class="btn btn-sm btn-warning">Enregistrer les
-                                                        modifications</button>
-                                                </div>
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        
+                                                        <button type="submit" class="btn btn-sm btn-warning">Enregistrer les
+                                                            modifications</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
                                         </div>
-
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        </div>
                     </div>
 
 
@@ -448,18 +436,23 @@
                 <div class="col-md-12">
                     <div class="pull-right">
                         <div class="pagination">
-                            <ul>
-                                <li><a href="#">Prev</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">Next</a></li>
-                            </ul>
+                            {{-- LA PAGINATION --}}
+                            <div style="display: flex; justify-content: center;" class="mb-3 mt-3">
+                                {{$vehicules->links()}}
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
+
+    <style>
+        .item-thumb img {
+
+            width: 380px;
+            height: 200px;
+        }
+    </style>
 @endsection

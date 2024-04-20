@@ -14,16 +14,16 @@
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
                     <h2>
                         <marquee style="color: #FDC600;">Votre solution pour une location sans stress !</marquee>
-                    </h2><br><br>
+                    </h2><br>
                     <div class="sticky-top">
                         <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 20px;">
                             <b>Notre plateforme vous connecte directement avec des propriétaires de biens immobiliers et de
                                 véhicules, vous permettant de louer rapidement et en toute simplicité votre prochain
                                 appartement, bureau ou voiture. Louez en toute confiance, sans tracas.</b>
-                            <br><br><br>
+                            <br>
                             @if (Auth::check() && Auth::user()->role == 'ENTREPRISE')
                                 <div class="button-container">
-                                    <a href type="button" class="custom-button primary">Enregistrer Appartement</a>
+                                    <a href="{{ route('appartement') }}" type="button" class="custom-button primary">Enregistrer Appartement</a>
                                     <a href="{{ route('bureaux') }}" type="button" class="custom-button secondary">Enregistrer Bureau</a>
                                     <a href="{{ route('vehicule') }}" type="button" class="custom-button danger">Enregistrer Voiture</a>
                                 </div>
@@ -37,177 +37,6 @@
         
     </div> 
 
-    
-
-    <div class="home-lager-shearch">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 large-search">
-                    <div class="search-form wow pulse">
-                        <form action="" class=" form-inline">
-                            <div class="col-md-12 clear">
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Key word">
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Select your city">
-                                        <option>New york, CA</option>
-                                        <option>Paris</option>
-                                        <option>Casablanca</option>
-                                        <option>Tokyo</option>
-                                        <option>Marraekch</option>
-                                        <option>kyoto , shibua</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4">
-                                    <select id="basic" class="selectpicker show-tick form-control">
-                                        <option> -Status- </option>
-                                        <option>Rent </option>
-                                        <option>Boy</option>
-                                        <option>used</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12 clear">
-                                {{-- <div class="search-row">   
-
-                                <div class="col-sm-3">
-                                    <label for="price-range">Price range ($):</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[0,450]" id="price-range" ><br />
-                                    <b class="pull-left color">2000$</b> 
-                                    <b class="pull-right color">100000$</b>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Property geo (m2) :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[50,450]" id="property-geo" ><br />
-                                    <b class="pull-left color">40m</b> 
-                                    <b class="pull-right color">12000m</b>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <label for="price-range">Min baths :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[250,450]" id="min-baths" ><br />
-                                    <b class="pull-left color">1</b> 
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Min bed :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0" 
-                                        data-slider-max="600" data-slider-step="5" 
-                                        data-slider-value="[250,450]" id="min-bed" ><br />
-                                    <b class="pull-left color">1</b> 
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  --> 
-
-                            </div> --}}
-
-                                {{-- <div class="search-row">  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Fire Place(3100)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Dual Sinks(500)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Hurricane Shutters(99)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Swimming Pool(1190)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 2 Stories(4600)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Emergency Exit(200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Laundry Room(10073)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->  
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Jog Path(1503)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 26' Ceilings(1200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  --> 
-                            </div>    --}}
-                            </div>
-                            <div class="center">
-                                <input type="submit" value="" class="btn btn-default btn-lg-sheach">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     
     <!-- property area -->
@@ -220,7 +49,7 @@
 
                             <ul class="sort-by-list">
                                 <li class="">
-                                    <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
+                                    <a href="{{ route('appartement.index') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         Appartements <i class="fa fa-sort-amount-asc"></i>
                                     </a>
@@ -233,7 +62,7 @@
                                 </li>
 
                                 <li class="">
-                                    <a href="" class="order_by_date" data-orderby="property_date"
+                                    <a href="{{ route('home') }}" class="order_by_date" data-orderby="property_date"
                                         data-order="ASC">
                                         Véhicules <i class="fa fa-sort-amount-asc"></i>
                                     </a>
@@ -250,9 +79,38 @@
 
                     <div class="col-md-12 ">
                         <div id="list-type" class="proerty-th">
+
+                            <br>
+                            <form action="{{ route('search.bureaux') }}" method="GET">
+
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="lieux" name="lieux" placeholder="Ville, Quartier">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="prix_min" name="prix_min" placeholder="Prix minimum">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" id="prix_max" name="prix_max" placeholder="Prix maximum">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary">Rechercher</button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                            
                             
 
-                            <h4>Liste des bureaux disponibles</h4>
+                            <h5>Liste des bureaux disponibles</h5>
 
                             <div class="col-md-12 clear">
                                 @if(Session::get('success'))
@@ -262,7 +120,7 @@
                                 @endif
         
                                 @foreach ($bureaux as $bureau)
-                                <div class="col-sm-6 col-md-3 p0">
+                                <div class="col-sm-6 col-md-4 p0">
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb position-relative">
                                             @php
@@ -282,7 +140,7 @@
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b> Climatiseur : </b> {{ $bureau->climaVenilo }}</span><br>
                                             <span class="proerty-price pull-right"><b class="badge badge-primary">{{ $bureau->prix }} FCFA </b></span>
-                                            <span class="pull-left"><b> Toilette : </b> {{ $bureau->toilette }}</span>
+                                            <span class="pull-left"><b> Toilette : </b> {{ $bureau->toilette }}</span><br>
                                             <span class="pull-left"><b> Salle de reunion : </b> {{ $bureau->salleReunion }}</span>
                                         </div>                   
                                     </div>
@@ -313,14 +171,11 @@
     {{-- Css des bouton --}}
     <style>
 
-/* CSS */
-.item-thumb img {
-    max-width: 100%; /* Limite la largeur de l'image à 100% de la largeur du conteneur */
-    max-height: 100%; /* Limite la hauteur de l'image à 100% de la hauteur du conteneur */
-    width: auto; /* Ajuste automatiquement la largeur de l'image pour conserver ses proportions */
-    height: auto; /* Ajuste automatiquement la hauteur de l'image pour conserver ses proportions */
-}
+        .item-thumb img {
 
+        width: 100px;
+        height: 50px;
+        }
 
         .button-container {
             text-align: center;

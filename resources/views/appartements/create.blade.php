@@ -200,7 +200,7 @@
 
                                         <div class="row">
                                             <div class=" col-md-6 form-group">
-                                                <label>Adresse</label>
+                                                <label>Ville, Quartier</label>
                                                 <input name="lieux" id="lieux" type="text" class="form-control">
                                             </div>
             
@@ -226,24 +226,20 @@
         
         
                                     <div class="tab-pane" id="step4">                                        
-                                        <h4 class="info-text"> Finished and submit </h4>
+                                        <h4 class="info-text"> Terminé et Soumettre </h4>
                                         <div class="row">  
                                             <div class="col-sm-12">
                                                 <div class="">
                                                     <p>
-                                                        <label><strong>Terms and Conditions</strong></label>
-                                                        By accessing or using  GARO ESTATE services, such as 
-                                                        posting your property advertisement with your personal 
-                                                        information on our website you agree to the
-                                                        collection, use and disclosure of your personal information 
-                                                        in the legal proper manner
+                                                        Merci d'avoir choisi Locathabitat pour publier votre appartement à louer. Nous sommes là pour vous aider à trouver les locataires parfaits.
+                                                        Assurez-vous de fournir des informations détaillées pour attirer davantage de candidats. <br><strong> <h4 class="info-text">Bienvenue sur Locathabitat</h4></strong>
                                                     </p>
-        
-                                                    <div class="checkbox">
+                                                    
+                                                    {{-- <div class="checkbox">
                                                         <label>
                                                             <input type="checkbox" /> <strong>Accept termes and conditions.</strong>
                                                         </label>
-                                                    </div> 
+                                                    </div>  --}}
         
                                                 </div> 
                                             </div>
@@ -293,13 +289,13 @@
                 <div class="modal-body">
 
                     <p> Frais de dépôt d'annonce <b class="badge rounded-pill bg-success"><span style="color: white;">
-                                5.000 FCFA </span></b></p>
+                                10.000 FCFA </span></b></p>
                     <span style="color:rgb(255, 0, 0);"><b>Cette somme est non remboursable</b></span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
 
-                    <span id="payer"> <kkiapay-widget amount="4907" key="caf3f6e0eacf11ee80ae5bdd91083b6e"
+                    <span id="payer"> <kkiapay-widget amount="9814" key="caf3f6e0eacf11ee80ae5bdd91083b6e"
                             {{-- {# url="<url-vers-votre-logo>" #}  --}} position="center" sandbox="true" data="" method="post"
                             {{-- {# callback="<url-de-redirection-quand-lepaiement-est-reuissi>" #} --}}>
                         </kkiapay-widget>

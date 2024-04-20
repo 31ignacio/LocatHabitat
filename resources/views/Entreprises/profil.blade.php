@@ -19,27 +19,32 @@
 <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
     <div class="container">   
         <div class="row">
-            {{-- <div class="col-md-1"></div> --}}
+
+            {{-- Mon profil --}}
             <div class="col-md-7 profiel-container">
-
-                
-
                 <form action="{{ route('profil.update', ['entreprise' => $entreprise->id]) }}" method="post">
                     @csrf
 
                     <div class="profiel-header">
                         <h3>
-                            <b>PROFIL</b> YOUR PROFILE <br>
+                            <b>Mon profil</b> <br>
                             <small>Vous pouvez modifier votre profil</small>
                         </h3>
                         <hr>
                     </div>
 
                     @if(Session::get('success'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-success" id="msg_success">
                             {{Session::get('success')}}
                         </div>
                     @endif
+
+                    <script>
+                         // Masquer le message d'erreur après 3 secondes
+                        setTimeout(function() {
+                            $('#msg_success').hide();
+                        }, 5000);
+                    </script>
 
 
                     <div class="clear">
@@ -103,50 +108,70 @@
                     </div>
                     <br>
                 </form>
-
             </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-4 profiel-container">
 
-                <form action="" method="">
-                    <div class="profiel-header">
+            <div class="col-md-1"></div>
+
+            {{-- Changer mot de passe --}}
+            <div class="col-md-4 profile-container">
+                <form action="{{ route('password.update') }}" method="post">
+                    @csrf
+                    <div class="profile-header">
                         <h3>
-                            
                             <small><b>Changer mon mot de passe</b></small>
                         </h3>
                         <hr>
                     </div>
+            
+                    @if(Session::get('danger'))
+                        <div class="alert alert-warning" id="msg_danger">
+                            {{ Session::get('danger') }}
+                        </div>
+                    @endif
 
+                    <script>
+                        // Masquer le message d'erreur après 3 secondes
+                       setTimeout(function() {
+                           $('#msg_danger').hide();
+                       }, 5000);
+                   </script>
+            
                     <div class="clear">
-                       
                         <div class="col-sm-12 padding-top-25">
-
                             <div class="form-group">
-                                <label>Ancien mot de passe</label>
-                                <input name="firstname" type="text" class="form-control" placeholder="Andrew...">
+                                <label for="old_password">Ancien mot de passe</label>
+                                <input name="old_password" id="old_password" type="password" value="{{old('old_password')}}" class="form-control" placeholder="Ancien mot de passe...">
+                                @error('old_password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label>Nouveau mot de passe</label>
-                                <input name="lastname" type="text" class="form-control" placeholder="Smith...">
+                                <label for="password">Nouveau mot de passe</label>
+                                <input name="password" id="password" type="password" class="form-control" value="{{old('password')}}" placeholder="Nouveau mot de passe...">
+                            
+                                @error('password')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div> 
                             <div class="form-group">
-                                <label>Confimer nouveau mot de passe</label>
-                                <input name="email" type="email" class="form-control" placeholder="andrew@email@email.com.com">
+                                <label for="password_confirmation">Confirmer nouveau mot de passe</label>
+                                <input name="password_confirmation" id="password_confirmation" value="{{old('password_confirmation')}}" type="password" class="form-control" placeholder="Confirmer mot de passe...">
+                            
+                                @error('password_confirmation')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div> 
                         </div>
-                        
-
                     </div>
-
-                   
+            
                     <div class="col-sm-5 col-sm-offset-1">
                         <br>
-                        <input type='button' class='btn btn-finish btn-primary' name='finish' value='Finish' />
+                        <button type="submit" class="btn btn-sm btn-primary">Modifier</button>
                     </div>
                     <br>
                 </form>
-
             </div>
+            
 
 
             
