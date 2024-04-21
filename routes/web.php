@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\BureauxController;
 use App\Http\Controllers\ContacteController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VehiculeController;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('welcome');
 });
 Route::get('/', [UserAuthController::class, 'index'])->name('home');
@@ -144,3 +145,8 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
     Route::get('/search/appartements', [AppartementController::class, 'searchAppartement'])->name('search.appartement');
 
 //end
+
+Route::get('/Entreprise/liste', [EntrepriseController::class, 'index'])->name('entreprise.liste');
+Route::get('/entreprise/{id}', [EntrepriseController::class, 'show'])->name('entreprise.show');
+Route::put('/entreprise/{id}/activer', [EntrepriseController::class, 'activer'])->name('entreprise.activer');
+Route::put('/entreprise/{id}/desactiver', [EntrepriseController::class, 'desactiver'])->name('entreprise.desactiver');

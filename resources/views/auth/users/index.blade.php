@@ -12,9 +12,9 @@
         <div class="container slider-content">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                    <h2>
+                    {{-- <h2>
                         <marquee style="color: #FDC600;">Votre solution pour une location sans stress !</marquee>
-                    </h2>
+                    </h2> --}}
                     <div class="sticky-top">
                         <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 20px;">
                             <b>Notre plateforme vous connecte directement avec des propriétaires de biens immobiliers et de
@@ -23,9 +23,9 @@
                             <br><br>
                             @if (Auth::check() && Auth::user()->role == 'ENTREPRISE')
                                 <div class="button-container">
-                                    <a href="{{ route('appartement') }}" type="button" class="custom-button primary">Enregistrer Appartement</a>
-                                    <a href="{{ route('bureaux') }}" type="button" class="custom-button secondary">Enregistrer Bureau</a>
-                                    <a href="{{ route('vehicule') }}" type="button" class="custom-button danger">Enregistrer Voiture</a>
+                                    <a href="{{ route('appartement') }}" type="button" class=" btn-sm custom-button primary">Enregistrer Appartement</a>
+                                    <a href="{{ route('bureaux') }}" type="button" class="btn-sm custom-button secondary">Enregistrer Bureau</a>
+                                    <a href="{{ route('vehicule') }}" type="button" class="btn-sm custom-button danger">Enregistrer Voiture</a>
                                 </div>
                             @endif
                         </div>
@@ -140,7 +140,7 @@
                                         <div class="item-entry overflow">
                                             <h5><a href="{{ route('vehicule.detail', $vehicule->id) }}"><span style="display: block; text-align: center;">{{ $vehicule->marque }}</span></a></h5>
                                             <div class="dot-hr"></div>
-                                            <span class="pull-left"><b> Climatiseur : </b> {{ $vehicule->climatiseur }}</span>
+                                            <span class="pull-left"><b> Climatiseur : </b> {{ $vehicule->climatiseur }}</span><br>
                                             <span class="proerty-price pull-right"><b class="badge badge-primary">{{ $vehicule->prix }} FCFA </b></span>
                                             <span class="pull-left"><b> Chauffeur : </b> {{ $vehicule->chauffeur }}</span>
                                             <span class="pull-left"><b> Caburant : </b> {{ $vehicule->caburation }}</span>

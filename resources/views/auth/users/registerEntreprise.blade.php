@@ -129,7 +129,7 @@
                             <div class="form-group col-md-12">
 
                                 <label for="">Bref description</label>
-                                <textarea name="description" cols="30" rows="3" class="form-control"></textarea>
+                                <textarea name="description" cols="30" rows="3" class="form-control" value="{{old('description')}}"></textarea>
                             </div>
                         </div>
                         <div class="text-center">

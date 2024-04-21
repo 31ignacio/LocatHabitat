@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('bureaus', function (Blueprint $table) {
             $table->id();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->integer('nombreSalle');
             $table->string('climaVenilo');
             $table->string('wifi');

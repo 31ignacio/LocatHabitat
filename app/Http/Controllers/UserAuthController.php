@@ -43,7 +43,7 @@ class UserAuthController extends Controller
             'quatier'=>'required',
             'telephone'=>'required',
             'email'=>'required|unique:users,email',
-            'password' => 'required|confirmed|min:6',
+            'password' => 'required|min:6',
             'cfpassword' => 'required'
 
         ], [
@@ -52,7 +52,6 @@ class UserAuthController extends Controller
             'ville.required'=>'Le nom de votre ville est requis',
             'quatier.required'=>'Le nom de votre quatier est requis',
             'telephone.required'=>'Le numéro de téléphone est requis',
-
             'email.required'=>'Votre email est requis',
             'email.unique'=>'Cette adresse mail est déjà prise', 
             'password.required'=>'Le mot de passe est requis',
@@ -70,6 +69,7 @@ class UserAuthController extends Controller
                 'email' => $request->email,
                 'telephone' => $request->telephone, // Je suppose que c'est $request->telephone
                 'role' => "ENTREPRISE",
+                'estActive'=>1,
                 'password' => Hash::make($request->password),
             ]);
             
@@ -110,19 +110,37 @@ class UserAuthController extends Controller
         ]);
 
         try {
-            //code...
-            if(auth()->attempt($request->only('email','password'))){
-                //Rediriger vers la page d'accueil
-
-                return redirect('/');
-            }else{
-                return redirect()->back()->with('error','Information de connexion non reconnu');
+            // Vérifier les informations d'identification de l'utilisateur
+            $credentials = $request->only('email', 'password');
+            
+            // Rechercher l'utilisateur par son email
+            $user = User::where('email', $request->email)->first();
+            
+            // Vérifier si l'utilisateur existe
+            if (!$user) {
+                // Informer l'utilisateur que les informations de connexion sont incorrectes
+                return redirect()->back()->with('error', 'Informations de connexion incorrectes.');
             }
-
+        
+            // Vérifier si le compte de l'utilisateur est actif
+            if (!$user->estActive) {
+                // Informer l'utilisateur que son compte est désactivé
+                return redirect()->back()->with('error', 'Votre compte est désactivé. Veuillez contacter l\'administrateur.');
+            }
+        
+            // Authentifier l'utilisateur
+            if (auth()->attempt($credentials)) {
+                // Rediriger vers la page d'accueil
+                return redirect('/');
+            } else {
+                // Informer l'utilisateur que les informations de connexion sont incorrectes
+                return redirect()->back()->with('error', 'Informations de connexion incorrectes.');
+            }
         } catch (Exception $e) {
-            //throw $th;
+            // Gérer les exceptions
         }
-
+        
+        
     }
 
     public function handleLogout(){

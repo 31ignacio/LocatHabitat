@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('entretien');
             $table->string('terasse');
             $table->string('meuble');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->text('lieux');
             $table->text('images');
             $table->float('prix');

@@ -82,7 +82,7 @@
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.annonce') }}">Mes annonces</a></li>
 
                     @endauth
-                {{-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="property.html">Property</a></li> --}}
+                <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.liste') }}">Entreprises</a></li>
                 
 
                 <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('contacte.create') }}">Contacte</a></li>
