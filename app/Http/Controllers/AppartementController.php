@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContacteProprietaireAppartementMail;
 use App\Models\Appartement;
 use App\Models\Entreprise;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AppartementController extends Controller
 {
@@ -171,6 +173,10 @@ class AppartementController extends Controller
         $telephone = $request->telephone;
         $message = $request->message;
         $email= $request->email;
+
+        Mail::to($entreprise)->send(new ContacteProprietaireAppartementMail($nom, $telephone, $email, $message));
+
+        return back()->with('success', 'Votre message a bien été transmis .');
     }
 
 }

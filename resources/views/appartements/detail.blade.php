@@ -305,6 +305,20 @@
                     <form action="{{ route('appartement.mailProprietaire') }}" method="POST">
                         @csrf
 
+                        @if(Session::get('success'))
+                        <div class="alert alert-success text-center" id="msg_success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+    
+                    <script>
+                         // Masquer le message d'erreur après 3 secondes
+                        setTimeout(function() {
+                            $('#msg_success').hide();
+                        }, 10000);
+                    </script>
+    
+
                         <input type="hidden" name="entreprise" id="" value="{{ $appartements->entreprise->user->email }}">
                         <div class="form-group">
                             <label for="nom">Votre nom :</label>

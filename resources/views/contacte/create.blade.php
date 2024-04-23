@@ -49,18 +49,6 @@
                     @csrf
                     <h4>Envoyez un mail en remplissant le formulaire ci-dessous</h4><br>
 
-                    @if(Session::get('success'))
-                    <div class="alert alert-success text-center" id="msg_success">
-                        {{Session::get('success')}}
-                    </div>
-                @endif
-
-                <script>
-                     // Masquer le message d'erreur après 3 secondes
-                    setTimeout(function() {
-                        $('#msg_success').hide();
-                    }, 5000);
-                </script>
 
                     <div class="row">
                         <div class="col-sm-6">

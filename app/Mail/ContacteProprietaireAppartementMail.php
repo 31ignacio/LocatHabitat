@@ -13,41 +13,24 @@ class ContacteProprietaireAppartementMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct()
+    public $nom;
+    public $telephone;
+    public $email;
+    public $message;
+
+
+
+    public function __construct($nom, $telephone, $email, $message)
     {
-        //
+        $this->nom = $nom;
+        $this->telephone = $telephone;
+        $this->email = $email;
+        $this->message = $message;
+
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Contacte Proprietaire Appartement Mail',
-        );
-    }
-
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            view: 'view.name',
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [];
-    }
-}
+        return $this->markdown('emails.contacteProprietaireAppartement')
+                    ->subject('Vous avez reçu un nouveau message !');
+    }}
