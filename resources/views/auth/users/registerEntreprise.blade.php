@@ -106,25 +106,6 @@
     
                         </div>
  
-                        
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="">Mot de passe</label>
-                                <input type="password" class="form-control" name="password">
-
-                                @error('password')
-                                    <div class="text-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="">Confirmer mot de passe</label>
-                                <input type="password" class="form-control" name="cfpassword">
-
-                                @error('cfpassword')
-                                    <div class="text-danger">{{$message}}</div>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="form-group col-md-12">
 

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ModifierPasswordMail;
 use App\Models\Entreprise;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 
 class ProfilController extends Controller
 {
@@ -85,6 +86,8 @@ class ProfilController extends Controller
             $user->update([
                 'password' => Hash::make($request->password),
             ]);
+
+            Mail::to($user->email)->send(new ModifierPasswordMail($user));
 
             // Déconnecter l'utilisateur
             Auth::logout();

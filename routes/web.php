@@ -4,6 +4,7 @@ use App\Http\Controllers\AppartementController;
 use App\Http\Controllers\BureauxController;
 use App\Http\Controllers\ContacteController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\VehiculeController;
@@ -24,6 +25,8 @@ Route::get('/home', function () {
     return view('welcome');
 });
 Route::get('/', [UserAuthController::class, 'index'])->name('home');
+Route::get('/validate-account/{email}', [UserAuthController::class, 'defineAccess']);
+Route::post('/validate-account/{email}', [UserAuthController::class, 'submitDefineAccess'])->name('submitDefineAccess');
 
 
 //Déconnexion
@@ -63,6 +66,7 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
 
 //contacte
  Route::get('/contacte', [ContacteController::class, 'contacte'])->name('contacte.create');
+ Route::post('/contacte/admin', [ContacteController::class, 'store'])->name('contacte.store');
 
 
 //end
@@ -144,9 +148,16 @@ Route::get('/', [UserAuthController::class, 'index'])->name('home');
 
     Route::get('/search/appartements', [AppartementController::class, 'searchAppartement'])->name('search.appartement');
 
+    Route::post('/appartement/mail', [AppartementController::class, 'mailProprietaire'])->name('appartement.mailProprietaire');
+
+
 //end
 
 Route::get('/Entreprise/liste', [EntrepriseController::class, 'index'])->name('entreprise.liste');
 Route::get('/entreprise/{id}', [EntrepriseController::class, 'show'])->name('entreprise.show');
 Route::put('/entreprise/{id}/activer', [EntrepriseController::class, 'activer'])->name('entreprise.activer');
 Route::put('/entreprise/{id}/desactiver', [EntrepriseController::class, 'desactiver'])->name('entreprise.desactiver');
+
+
+Route::post('/newsletter', [NewsletterController::class, 'newsletter'])->name('newsletter');
+

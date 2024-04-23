@@ -101,7 +101,7 @@
                     <div class="section">
                         <h4 class="s-property-title">Description</h4>
                         <div class="s-property-content">
-                            <p>{{ $vehicules->entreprise->description }}</p>
+                            <p><pre>{{ $vehicules->entreprise->description }}</pre></p>
                         </div>
                     </div>
                     <!-- End description area  -->

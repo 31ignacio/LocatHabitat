@@ -12,9 +12,9 @@
         <div class="container slider-content">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                    <h2>
+                    {{-- <h2>
                         <marquee style="color: #FDC600;">Votre solution pour une location sans stress !</marquee>
-                    </h2><br>
+                    </h2><br> --}}
                     <div class="sticky-top">
                         <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 20px;">
                             <b>Notre plateforme vous connecte directement avec des propriétaires de biens immobiliers et de

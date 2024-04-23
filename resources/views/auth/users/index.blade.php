@@ -20,7 +20,7 @@
                             <b>Notre plateforme vous connecte directement avec des propriétaires de biens immobiliers et de
                                 véhicules, vous permettant de louer rapidement et en toute simplicité votre prochain
                                 appartement, bureau ou voiture. Louez en toute confiance, sans tracas.</b>
-                            <br><br>
+                            <br>
                             @if (Auth::check() && Auth::user()->role == 'ENTREPRISE')
                                 <div class="button-container">
                                     <a href="{{ route('appartement') }}" type="button" class=" btn-sm custom-button primary">Enregistrer Appartement</a>

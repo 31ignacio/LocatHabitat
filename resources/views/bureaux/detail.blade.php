@@ -159,7 +159,7 @@
                     <div class="section">
                         <h4 class="s-property-title">Description</h4>
                         <div class="s-property-content">
-                            <p>{{ $bureaux->description }}</p>
+                            <p><pre>{{ $bureaux->description }}</pre></p>
                         </div>
                     </div>
                     <!-- End description area  -->

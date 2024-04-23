@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubmitDefineAccessRequest;
+use App\Mail\ApresInscriptionMail;
 use App\Models\Entreprise;
+use App\Models\ResetCodePassword;
 use App\Models\User;
 use App\Models\Vehicule;
+use App\Notifications\InscriptionEntrepriseNotification;
 use Exception;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class UserAuthController extends Controller
 {
@@ -42,9 +49,7 @@ class UserAuthController extends Controller
             'ville'=>'required',
             'quatier'=>'required',
             'telephone'=>'required',
-            'email'=>'required|unique:users,email',
-            'password' => 'required|min:6',
-            'cfpassword' => 'required'
+            'email'=>'required|unique:users,email'
 
         ], [
             'entreprise.required'=>'Le nom de votre entreprise est requis',
@@ -54,11 +59,7 @@ class UserAuthController extends Controller
             'telephone.required'=>'Le numéro de téléphone est requis',
             'email.required'=>'Votre email est requis',
             'email.unique'=>'Cette adresse mail est déjà prise', 
-            'password.required'=>'Le mot de passe est requis',
-            'password.min'=> 'Le mot de passe doit avoir au moins 6 caractères',
-            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
-            'cfpassword.required' => 'La confirmation du mot de passe est requise.'
-
+            
         ]);
 
 
@@ -69,8 +70,7 @@ class UserAuthController extends Controller
                 'email' => $request->email,
                 'telephone' => $request->telephone, // Je suppose que c'est $request->telephone
                 'role' => "ENTREPRISE",
-                'estActive'=>1,
-                'password' => Hash::make($request->password),
+                'estActive'=>0,
             ]);
             
             Entreprise::create([
@@ -84,8 +84,40 @@ class UserAuthController extends Controller
                 'user_id' => $user->id, // Affecter l'ID de l'utilisateur nouvellement créé
             ]);
              
-           
-            return redirect()->back()->with('success','Votre compte a été crée. Connecter vous');
+            //Envoyer un mail pour que l'entreprise puisse confirmer son compte
+
+            //Envoyeer un code par mail pour verifier
+            //1- s'assurer que le user a été bien enregistré
+            if($user){
+                try {
+                    // Votre code...
+                
+                    // Supprimer les anciens codes de réinitialisation s'il y en a
+                    ResetCodePassword::where('email', $request->email)->delete();
+                
+                    // Générer un nouveau code
+                    $code = rand(1000, 9000);
+                
+                    // Enregistrer le nouveau code dans la base de données
+                    $data = [
+                        'code' => $code,
+                        'email' => $request->email
+                    ];
+                    ResetCodePassword::create($data);
+                
+                    // Envoyer la notification par e-mail à l'utilisateur
+                    Notification::route('mail', $request->email)->notify(new InscriptionEntrepriseNotification($code, $request->email,$request->entreprise));
+                
+                    return redirect()->back()->with('success', 'Votre compte a été créé. Connectez-vous');
+                
+                } catch (Exception $e) {
+                    dd($e);
+                    // Gérer l'erreur
+                    throw new Exception('Une erreur est survenue lors de l\'envoi du mail');
+                }
+                
+            }
+            
         } catch (Exception $e) {
             //throw $th;
             dd($e);
@@ -147,6 +179,47 @@ class UserAuthController extends Controller
 
         Auth::logout();
         return redirect('/');
+    }
+
+    public function defineAccess($email){
+
+        //1- S'assurer que l'email existe vraiment
+        $checkUserExist= User::where('email', $email)->first();
+        //2- S'il existe
+        if($checkUserExist){
+            return view('auth.users.validate-account', compact('email'));
+        }else{
+        //Si le mail n'existe pas
+            return redirect()->route('home');
+        }
+
+
+    }
+
+    public function submitDefineAccess(SubmitDefineAccessRequest $request){
+
+        try {
+            //code...
+            $user= User::where('email', $request->email)->first();
+            if($user){
+                $user->password= Hash::make($request->password);
+                $user->email_verified_at= Carbon::now();
+                $user->estActive=1;
+                $user->update(); 
+
+                //supprimer le code de la table apres confirmation de son compte
+                if($user){
+                    ResetCodePassword::where('email', $user->email)->delete();
+                }
+                Mail::to($user->email)->send(new ApresInscriptionMail($user));
+
+                return redirect()->route('handleUserLogin')->with('success', 'Vos accès on été correctement défini');
+            }else{
+                //404
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
     }
 
 }

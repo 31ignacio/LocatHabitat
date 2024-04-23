@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ActiverMail;
+use App\Mail\DesactiverMail;
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EntrepriseController extends Controller
 {
@@ -32,7 +35,8 @@ class EntrepriseController extends Controller
         // Mettre à jour la propriété estActive de l'utilisateur
         $user->estActive = 1;
         $user->save(); // Enregistrer les modifications dans la base de données
-    
+        Mail::to($user->email)->send(new ActiverMail($user));
+
         
         return redirect()->back()->with('success', 'Entreprise activée avec succès.');
     }
@@ -45,6 +49,9 @@ class EntrepriseController extends Controller
         // Mettre à jour la propriété estActive de l'utilisateur
         $user->estActive = 0;
         $user->save();
+
+        Mail::to($user->email)->send(new DesactiverMail($user));
+
 
         return redirect()->back()->with('success', 'Entreprise désactivée avec succès.');
     }

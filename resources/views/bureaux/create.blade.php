@@ -16,7 +16,7 @@
     <div class="content-area user-profiel" style="background-color: #FCFCFC;">&nbsp;
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-5 col-sm-4">
                     <img src="{{ asset('assets/img/slide1/photo-du-lieu.jpg') }}" alt="Description de l'image"
                         class="image-adjust">
 
@@ -52,7 +52,7 @@
                         <div class="clear">
 
                             <div class="col-sm-6 padding-top-25">
-
+                                
                                 <div class="form-group">
                                     <label>Nombre de salle</label>
                                     <input name="nombreSalle" id="nombreSalle" type="number" min="0"
@@ -158,8 +158,6 @@
                                 </div>
                             </div>
 
-
-
                             <div class="col-sm-6 padding-top-25">
 
                                 <div class="form-group">
@@ -172,7 +170,6 @@
                         </div>
                         <div class="col-sm-5 col-sm-offset-1">
                             <br>
-                            {{-- <input type='button' class='btn btn-finish btn-primary' name='finish' value='Finish' /> --}}
                             <button type="button" class='btn btn-finish btn-primary' id="envoyer"
                                 onclick="submitForm()"> Valider</button>
                         </div>
@@ -180,6 +177,141 @@
                     </form>
 
                 </div>
+
+                {{-- <div class="col-md-7 profiel-container">
+                    <form id="form" enctype="multipart/form-data">
+                        @csrf
+                        <div class="profiel-header">
+                            <h3>
+                                <b>Enregistrer</b> mon bureau <br>
+                                <small>Veuillez enregistrer votre bureau en remplissant le formulaire ci-dessous</small>
+                            </h3>
+                            <hr>
+                        </div>
+                
+                        @if (Session::get('success'))
+                        <div class="alert alert-success">
+                            {{ Session::get('success') }}
+                        </div>
+                        @endif
+                
+                        <div id="error-message" class="alert alert-warning text-center" style="display: none;">
+                            Veuillez remplir tous les champs.
+                        </div>
+                
+                        <div id="msg500"></div>
+
+
+                        <div class="row">
+                            
+                            <div class="col-md-6">
+                                
+                                <div class="form-group">
+                                    <label>Nombre de salle</label>
+                                    <input name="nombreSalle" id="nombreSalle" type="number" min="0" class="form-control">
+                                    @error('nombreSalle')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>Les bureaux sont climatisés ?</label>
+                                    <select name="climaVenilo" id="climaVenilo" class="form-control">
+                                        <option value="Climatiseur">Climatiseur</option>
+                                        <option value="Brasseur">Brasseur</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ville / Quartier</label>
+                                    <input name="lieux" id="lieux" type="text" class="form-control">
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>Les bureaux disposent des toilettes ?</label>
+                                    <select name="toilette" id="toilette" class="form-control">
+                                        <option value="Oui">Oui</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Les bureaux sont équipés?</label>
+                                    <select name="bureauEquiper" id="bureauEquiper" class="form-control">
+                                        <option value="Oui">Oui</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label style="font-size: 85%;">Les bureaux disposent d'une connexion internet ?</label>
+                                    <select name="wifi" id="wifi" class="form-control">
+                                        <option value="Wifi">Wifi</option>
+                                        <option value="Fibre optique">Fibre optique</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Y a t-il une salle de reunion ?</label>
+                                    <select name="salleReunion" id="salleReunion" class="form-control">
+                                        <option value="Oui">Oui</option>
+                                        <option value="Non">Non</option>
+                                    </select>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>Emplacement </label>
+                                    <select name="emplacement" id="emplacement" class="form-control">
+                                        <option value="Rez-de-chaussée">Rez-de-chaussée</option>
+                                        <option value="Sur étage">Sur étage</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Prix</label>
+                                    <input type="text" name="prix" id="prix" class="form-control" oninput="validatePrix(this)">
+                                    <div id="error-message2" class="error-message text-danger"></div>
+                                </div>
+                
+                                <div class="form-group">
+                                    <label>Image(<span style="font-size: 10px;">vous puvez ajouter plusieurs images à la fois</span>)</label>
+                                    <input name="images[]" id="images" type="file" accept="image/*" class="form-control" multiple>
+                                </div>
+                            </div>
+                
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Autres informations </label>
+                                    <textarea name="description" id="description" cols="38" rows="6" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-sm-5 col-sm-offset-1">
+                                <br>
+                                <button type="button" class='btn btn-finish btn-primary' id="envoyer" onclick="submitForm()"> Valider</button>
+                            </div>
+                        </div>
+                        <br>
+                    </form>
+                </div> --}}
+                
 
             </div><!-- end row -->
 
@@ -193,9 +325,7 @@
         }
     </style>
 
-
     <script src="https://cdn.kkiapay.me/k.js"></script>
-
 
     <!-- Modal resumé -->
     <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"

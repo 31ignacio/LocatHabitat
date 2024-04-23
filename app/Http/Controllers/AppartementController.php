@@ -151,4 +151,26 @@ class AppartementController extends Controller
     }
     
 
+    public function mailProprietaire(Request $request){
+
+        $request->validate([
+            'nom'=>'required',
+            'telephone'=>'required',
+            'message'=>'required',
+            'email'=>'required'
+
+        ], [
+            'nom.required'=>' Votre nom est requis',
+            'message.required'=>'Le message est requis',
+            'telephone.required'=>'Le numéro de téléphone est requis',
+            'email.required'=>'Votre email est requis',
+            
+        ]);
+        $entreprise= $request->entreprise;
+        $nom= $request->nom;
+        $telephone = $request->telephone;
+        $message = $request->message;
+        $email= $request->email;
+    }
+
 }

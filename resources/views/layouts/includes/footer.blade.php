@@ -91,11 +91,19 @@
                         <div class="footer-title-line"></div>
                         <p>Restez à l'affût des dernières offres et des nouvelles annonces sur LocatHabitat ! Inscrivez-vous à notre newsletter pour recevoir des mises à jour exclusives directement dans votre boîte de réception.</p>
 
-                        <form>
+                        <form method="POST" action="{{ route('newsletter') }}">
+                            @csrf
+
                             <div class="input-group">
-                                <input class="form-control" type="text" placeholder="E-mail ... ">
+                                <input class="form-control" type="email" name="email" placeholder="Votre adresse e-mail">
+
+                                @error('email')
+
+                                <div class="text text-danger">{{ $message }}</div>
+                                    
+                                @enderror
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary subscribe" type="button"><i class="pe-7s-paper-plane pe-2x"></i></button>
+                                    <button class="btn btn-primary subscribe" type="submit"><i class="pe-7s-paper-plane pe-2x"></i></button>
                                 </span>
                             </div>
                             <!-- /input-group -->

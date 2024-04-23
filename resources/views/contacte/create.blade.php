@@ -25,63 +25,97 @@
 
             <div class="" id="contact1">                        
                 <div class="row">
-                    <div class="col-sm-4">
-                        <h3><i class="fa fa-map-marker"></i> Adresse</h3>
+                    <div class="col-sm-6">
+                        <h4><i class="fa fa-map-marker"></i> Adresse</h4>
                         <p>Cotonou,
                             <strong>Bénin</strong>
                         </p>
                     </div>
                     <!-- /.col-sm-4 -->
-                    <div class="col-sm-4">
-                        <h3><i class="fa fa-phone"></i> Appel/Whatsapp</h3>
-                        <p class="text-muted">Vous pouvez nous appeler ou laisser un message whatsapp.</p>
+                    <div class="col-sm-6">
+                        <h4><i class="fa fa-phone"></i> Appel/Whatsapp</h4>
+                        <p class="text-muted" style="font-size: 13px;"  >Vous pouvez nous appeler ou laisser un message whatsapp.</p>
                         <p><strong>+229 40 73 53 35</strong></p>
                     </div>
                     <!-- /.col-sm-4 -->
-                    <div class="col-sm-4">
-                        <h3><i class="fa fa-envelope"></i> Assistance électronique</h3>
-                        <p class="text-muted">N'hésitez pas à nous écrire un email.</p>
-                        <ul>
-                            <li><strong><a href="mailto:">ariexpertize@gmail.com</a></strong>   </li>
-                            {{-- <li><strong><a href="#">Ticketio</a></strong> - our ticketing support platform</li> --}}
-                        </ul>
-                    </div>
+                    
                     <!-- /.col-sm-4 -->
                 </div>
                 <!-- /.row --> 
                
                 <hr>
                 {{-- <h2>Contact form</h2> --}}
-                <form>
+                <form method="post" action="{{ route('contacte.store') }}">
+                    @csrf
+                    <h4>Envoyez un mail en remplissant le formulaire ci-dessous</h4><br>
+
+                    @if(Session::get('success'))
+                    <div class="alert alert-success text-center" id="msg_success">
+                        {{Session::get('success')}}
+                    </div>
+                @endif
+
+                <script>
+                     // Masquer le message d'erreur après 3 secondes
+                    setTimeout(function() {
+                        $('#msg_success').hide();
+                    }, 5000);
+                </script>
+
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="firstname">Nom</label>
-                                <input type="text" class="form-control" id="firstname">
+                                <label for="nom">Nom</label>
+                                <input type="text" class="form-control" id="nom" name="nom"  value="{{ old('nom') }}">
+
+                                @error('nom')
+
+                                <div class="text text-danger">{{ $message }}</div>    
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="lastname">Prénom</label>
-                                <input type="text" class="form-control" id="lastname">
+                                <label for="prenom">Prénom</label>
+                                <input type="text" class="form-control" id="prenom" name="prenom" value="{{ old('prenom') }}">
+
+                                @error('prenom')
+
+                                <div class="text text-danger">{{ $message }}</div>    
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" id="email">
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+
+                                @error('email')
+
+                                <div class="text text-danger">{{ $message }}</div>    
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="subject">Sujet</label>
-                                <input type="text" class="form-control" id="subject">
+                                <input type="text" class="form-control" id="subject" name="sujet" value="{{ old('sujet') }}">
+
+                                @error('sujet')
+
+                                <div class="text text-danger">{{ $message }}</div>    
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" class="form-control" cols="30" rows="10" ></textarea>
+                                <textarea id="message" name="message" class="form-control" cols="30" rows="10" value="{{ old('message') }}" ></textarea>
+                                
+                                @error('message')
+
+                                <div class="text text-danger">{{ $message }}</div>    
+                                @enderror
                             </div>
                         </div>
                         <div class="col-sm-12 text-center">
