@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('packing');
             $table->string('negociable');
             $table->string('climaVenilo');
-            $table->string('canal+');
+            $table->string('canal');
             $table->string('securite');
             $table->string('cuisine');
             $table->string('ptiDejeuner');

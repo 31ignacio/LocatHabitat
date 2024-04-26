@@ -138,6 +138,7 @@ class BureauxController extends Controller
             'bureauEquiper' => 'required',
             'salleReunion' => 'required',
             'emplacement' => 'required',
+            'description' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -153,6 +154,8 @@ class BureauxController extends Controller
             'salleReunion' => $validatedData['salleReunion'],
             'bureauEquiper' => $validatedData['bureauEquiper'],
             'climaVenilo' => $validatedData['climaVenilo'],
+            'description' => $validatedData['description'],
+
 
         ]);
 

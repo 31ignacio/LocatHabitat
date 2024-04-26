@@ -1,8 +1,7 @@
 @extends('layouts.master2')
 
-@section('content')
 
-<!-- register-area -->
+@section('content')
 
 
 <div class="register-area" style="background-color: rgb(249, 249, 249);">
@@ -15,13 +14,13 @@
             <div class="box-for overflow">
                 <div class="col-md-12 col-xs-12 login-blocks">
                     <!-- Flèche de retour -->
-                    <h2>Connexion</h2>
+                    <h2>Mot de passe oublié</h2>
                     <br>
                     <!-- Messages d'erreur/succès -->
                     @if(Session::get('error'))
-                    <div class="alert alert-danger" id="msg_error">
-                        {{Session::get('error')}}
-                    </div>
+                        <div class="alert alert-danger" id="msg_error">
+                            {{Session::get('error')}}
+                        </div>
                     @endif
 
                     <script>
@@ -31,9 +30,9 @@
                         }, 5000);
                     </script>
                     @if(Session::get('success'))
-                    <div class="alert alert-success" id="msg_success">
-                        {{Session::get('success')}}
-                    </div>
+                        <div class="alert alert-success" id="msg_success">
+                            {{Session::get('success')}}
+                        </div>
                     @endif
                     <script>
                         // Masquer le message de succès après 3 secondes
@@ -44,36 +43,27 @@
                     <br>
 
                     <!-- Formulaire de connexion -->
-                    <form action="{{ route('handleUserLogin') }}" method="post">
+                    <form action="{{ route('password.email') }}" method="post">
                         @method('post')
                         @csrf
 
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="text" class="form-control" value="{{old('email')}}" name="email">
+                            <label for="email">Votre adresse e-mail</label>
+                            <input type="email" class="form-control" value="{{old('email')}}" name="email">
 
                             @error('email')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" value="{{old('password')}}" name="password" id="password">
 
-                            @error('password')
-                            <div class="text-danger">{{$message}}</div>
-                            @enderror
-                        </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-sm btn-default"> Me connecter</button>
+                            <button type="submit" class="btn btn-sm btn-default"> Valider</button>
                         </div>
+                        
                         <br>
-                        <div id="emailHelp" class="form-text text-center mb-5 text-dark">
-                            Nouveau membre ? <a href="{{ route('user.registerEntreprise') }}" id="registerModalButton" class="text-dark fw-bold">Créer mon compte</a>
-                        </div>
+                        
                     </form>
-                    <br>
-                    <a href="{{ route('password.request') }}"> Mot de passe oubli ?</a>
+                    
                 </div>
             </div>
         </div>
@@ -99,5 +89,7 @@
         $('#registerModal').modal('show');
     });
 </script>
+
+
 
 @endsection

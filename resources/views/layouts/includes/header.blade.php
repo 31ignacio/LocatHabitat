@@ -46,7 +46,7 @@
             @guest
                 
             <div class="button navbar-right">
-                <a href="{{route('user.login')}}" class=" btn navbar-btn nav-button wow bounceInRight login">Connexion</a>
+                <a href="{{route('login')}}" class=" btn navbar-btn nav-button wow bounceInRight login">Connexion</a>
                 {{-- <a href="{{route('user.registerEntreprise')}}" class="btn navbar-btn nav-button wow fadeInRight">Inscription</a> --}}
                 <a href="#" id="registerModalButton" class="btn navbar-btn nav-button wow fadeInRight">Inscription</a>
 
@@ -78,19 +78,22 @@
             <ul class="main-nav nav navbar-nav navbar-right">
                
                 <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{route('home') }}">Accueil</a></li>
-                    @auth
+                
+                @auth
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.annonce') }}">Mes annonces</a></li>
 
-                    @endauth
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.liste') }}">Entreprises</a></li>
-                
+                {{-- <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.liste') }}">Entreprises</a></li> --}}
+                    @if(auth()->user()->email == 'ariexpertize@gmail.com')
+                        <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" href="{{ route('entreprise.liste') }}">Entreprises</a></li>
+                    @endif
+                @endauth
 
                 <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('contacte.create') }}">Contacte</a></li>
 
                 @auth
                     
                 <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Profil <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">{{ auth()->user()->name }} <b class="caret"></b></a>
                     <ul class="dropdown-menu navbar-nav">
                         <li>
                             <a href="{{ route('user.profil') }}">Profil</a>

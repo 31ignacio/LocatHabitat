@@ -157,45 +157,14 @@
                     <!-- .property-meta -->
 
                     <div class="section">
-                        <h4 class="s-property-title">Description</h4>
+                        <h4 class="s-property-title">Autre information </h4>
                         <div class="s-property-content">
                             <p><pre>{{ $bureaux->description }}</pre></p>
                         </div>
                     </div>
                     <!-- End description area  -->
 
-                    <div class="section additional-details">
-
-                        <h4 class="s-property-title">Information du propriétaire</h4>
-
-                        <ul class="additional-details-list clearfix">
-                            <li>
-                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Entreprise</span>
-                                <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $bureaux->entreprise->entreprise }}</span>
-                            </li>
-
-                            <li>
-                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Représentant</span>
-                                <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $bureaux->entreprise->representant }}</span>
-                            </li>
-                            <li>
-                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Adresse</span>
-                                <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $bureaux->entreprise->ville }} / {{ $bureaux->entreprise->quatier }}</span>
-                            </li>
-
-                            <li>
-                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Téléphone</span>
-                                <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $bureaux->entreprise->telephone }}</span>
-                            </li>
-
-                            {{-- <li>
-                                <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Email</span>
-                                <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $bureaux->entreprise->user->email }}</span>
-                            </li> --}}
-
-                        </ul>
-                    </div>  
-                    <!-- End additional-details area  -->
+                    
  
                 </div>
             </div>
@@ -280,6 +249,71 @@
 
                 </aside><br>
 
+
+                <div class="card">
+                    <div class="card-header">
+                        Envoyer un mail au propriétaire
+                    </div>
+                    <form action="{{ route('appartement.mailProprietaire') }}" method="POST">
+                        @csrf
+
+                        @if(Session::get('success'))
+                        <div class="alert alert-success text-center" id="msg_success">
+                            {{Session::get('success')}}
+                        </div>
+                    @endif
+    
+                    <script>
+                         // Masquer le message d'erreur après 3 secondes
+                        setTimeout(function() {
+                            $('#msg_success').hide();
+                        }, 10000);
+                    </script>
+    
+
+                        <input type="hidden" name="entreprise" id="" value="{{ $bureaux->entreprise->user->email }}">
+                        <div class="form-group">
+                            <label for="nom">Votre nom :</label>
+                            <input type="text" id="nom" name="nom">
+
+                            @error('nom')
+                            <div class="text text-danger">{{ $message }}</div>
+                                
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Votre email :</label>
+                            <input type="email" id="email" name="email">
+                            @error('email')
+                            <div class="text text-danger">{{ $message }}</div>
+                                
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Votre téléphone :</label>
+                            <input type="tel" id="telephone" name="telephone">
+
+                            @error('telephone')
+                            <div class="text text-danger">{{ $message }}</div>
+                                
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message :</label>
+                            <textarea id="message" name="message"></textarea>
+
+                            @error('message')
+                            <div class="text text-danger">{{ $message }}</div>
+                                
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <button type="submit">Envoyer</button>
+                        </div>
+                    </form>
+                </div>
+                
+
                 
 
             </div>
@@ -289,6 +323,66 @@
 
     </div>
 </div>
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+    .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .card-header {
+        background-color: #FFA600;
+        color: #fff;
+        padding: 15px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+    .form-group textarea {
+        height: 100px;
+    }
+    .form-group button {
+        background-color: #FFA600;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .form-group button:hover {
+        background-color: #FFA600;
+    }
+</style>
 
 <style>
     .call-button {

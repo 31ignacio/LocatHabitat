@@ -60,14 +60,14 @@
 
                         <div class="form-group">
                             <label for="code">Code</label>
-                            <input type="text" class="form-control" value="{{old('code')}}" name="code">
+                            <input type="text" class="form-control" name="code">
 
                             @error('code')
                             <div class="text-danger">{{$message}}</div>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="password">Mot de passe</label>
+                            <label for="password">Nouveau mot de passe</label>
                             <input type="password" class="form-control" value="{{old('password')}}" name="password" id="password">
 
                             @error('password')

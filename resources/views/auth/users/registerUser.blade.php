@@ -70,7 +70,7 @@
                         
                         <br>
                         <div id="emailHelp" class="form-text ttext mb-5 text-dark mt-5">
-                            Déjà inscrit ?<a href="{{route('user.login')}}" class="text-dark fw-bold"> Connectez-vous</a>
+                            Déjà inscrit ?<a href="{{route('login')}}" class="text-dark fw-bold"> Connectez-vous</a>
                         </div>
 
                         

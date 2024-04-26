@@ -9,6 +9,7 @@ use App\Models\ResetCodePassword;
 use App\Models\User;
 use App\Models\Vehicule;
 use App\Notifications\InscriptionEntrepriseNotification;
+use App\Notifications\PasswordForgetEntrepriseNotification;
 use Exception;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -108,7 +109,7 @@ class UserAuthController extends Controller
                     // Envoyer la notification par e-mail à l'utilisateur
                     Notification::route('mail', $request->email)->notify(new InscriptionEntrepriseNotification($code, $request->email,$request->entreprise));
                 
-                    return redirect()->back()->with('success', 'Votre compte a été créé. Connectez-vous');
+                    return redirect()->back()->with('success', 'Votre compte a été créé. Veuillez consulter votre boîte e-mail pour activer votre compte.');
                 
                 } catch (Exception $e) {
                     dd($e);
@@ -205,6 +206,118 @@ class UserAuthController extends Controller
                 $user->password= Hash::make($request->password);
                 $user->email_verified_at= Carbon::now();
                 $user->estActive=1;
+                $user->update(); 
+
+                //supprimer le code de la table apres confirmation de son compte
+                if($user){
+                    ResetCodePassword::where('email', $user->email)->delete();
+                }
+                Mail::to($user->email)->send(new ApresInscriptionMail($user));
+
+                return redirect()->route('handleUserLogin')->with('success', 'Vos accès on été correctement défini');
+            }else{
+                //404
+            }
+        } catch (Exception $e) {
+            dd($e);
+        }
+    }
+
+
+    public function showLinkRequestForm(){
+
+
+        return view('auth.users.passwordForget');
+    }
+
+
+    public function changePassword(Request $request){
+
+
+        $request->validate([
+            'email'=>'required'
+
+        ], [
+            'email.required'=>'Votre email est requis',
+            
+        ]);
+
+        $email = User::where('email', $request->email)->first();
+
+        if($email){
+            try {
+                // Votre code...
+            
+                // Supprimer les anciens codes de réinitialisation s'il y en a
+                ResetCodePassword::where('email', $request->email)->delete();
+            
+                // Générer un nouveau code
+                $code = rand(1000, 9000);
+            
+                // Enregistrer le nouveau code dans la base de données
+                $data = [
+                    'code' => $code,
+                    'email' => $request->email
+                ];
+                ResetCodePassword::create($data);
+            
+                // Envoyer la notification par e-mail à l'utilisateur
+                Notification::route('mail', $request->email)->notify(new PasswordForgetEntrepriseNotification($code, $request->email,$request->entreprise));
+            
+                return redirect()->back()->with('success', 'Un e-mail a été envoyé à votre adresse pour réinitialiser votre mot de passe. Veuillez vérifier votre boîte de réception.');
+            
+            } catch (Exception $e) {
+                dd($e);
+                // Gérer l'erreur
+                throw new Exception('Une erreur est survenue lors de l\'envoi du mail');
+            }
+        }else{
+        return back()->with('error','L\'adresse email n\'est pas valide');
+        }
+        
+    }
+
+    public function defineAccessMail($email,$code){
+
+        //1- S'assurer que l'email existe vraiment
+        $checkUserExist= User::where('email', $email)->first();
+        //2- S'il existe
+        if($checkUserExist){
+            return view('auth.users.validate-mail', compact('email','code'));
+        }else{
+        //Si le mail n'existe pas
+            return redirect()->route('home');
+        }
+
+
+    }
+
+
+    public function submitDefineAccessMail(Request  $request){
+
+        $request->validate([
+            'password' => 'required|min:6|same:confirme_password',
+            'confirme_password'=>'required|same:password',
+            'code'=>'required|exists:reset_code_passwords,code',
+
+        ], [
+            'code.required'=>'Le code est requis.',
+            'code.exists'=>'Ce mail est expiré,vueillez consulter votre boite mail.',
+            'password.required'=>'Le mot de passe es requis.',
+            'password.min'=> 'Le mot de passe doit être supérieur à cinq (05) caractères.',
+            'confirme_password'=> 'Confirmer mot de passe.',
+            'password.same'=>'Les mots de passe ne correspondent pas.',
+            'confirme_password.same'=>'Les mots de passe ne correspondent pas.',
+            
+        ]);
+
+
+        try {
+            //code...
+            $user= User::where('email', $request->email)->first();
+            if($user){
+                $user->password= Hash::make($request->password);
+                $user->email_verified_at= Carbon::now();
                 $user->update(); 
 
                 //supprimer le code de la table apres confirmation de son compte

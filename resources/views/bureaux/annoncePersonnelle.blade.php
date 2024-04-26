@@ -261,6 +261,14 @@
                                                     
 
                                                 </div>
+
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="chauffeur">Autres informations :</label>
+                                                    
+                                                        <textarea name="description" id="description" class="form-control" cols="10" rows="5">{{ $bureau->description }}</textarea>
+                                                    </div>
+                                                </div>
                                                 
                                                 <div class="modal-footer">
                                                     

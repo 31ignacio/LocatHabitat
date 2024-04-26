@@ -70,7 +70,7 @@ class AppartementController extends Controller
                  'lieux' => $request->lieux,
                  'packing' => $request->packing,
                  'terasse' => $request->terasse,
-                 'canal+' => $request->canal,
+                 'canal' => $request->canal,
                  'meuble' => $request->meuble,
                  'securite' => $request->securite,
                  'prix' => $request->prix,
@@ -177,6 +177,65 @@ class AppartementController extends Controller
         Mail::to($entreprise)->send(new ContacteProprietaireAppartementMail($nom, $telephone, $email, $message));
 
         return back()->with('success', 'Votre message a bien été transmis .');
+    }
+
+
+    public function update(Appartement $appartement){
+
+        //dd($appartement);
+
+        return view('appartements.update', compact('appartement'));
+    }
+
+    public function appartementUpdate(Request $request, $appartement){
+
+        $appartements = Appartement::findOrFail($appartement);
+
+        
+        try {
+                
+            $appartements->update([
+                'nombreSalon' => $request->nombreSalon,
+                'nombreChambre' => $request->nombreChambre,
+                'cuisine' => $request->cuisine,
+                'entretien' => $request->entretien,
+                'climaVenilo' => $request->climaVenilo,
+                'lieux' => $request->lieux,
+                'packing' => $request->packing,
+                'terasse' => $request->terasse,
+                'canal' => $request->canal,
+                'meuble' => $request->meuble,
+                'securite' => $request->securite,
+                'prix' => $request->prix,
+                'negociable' => $request->negociable,
+                'description' => $request->description,
+                'ptiDejeuner' => $request->ptiDejeuner,
+                'wifi' => $request->wifi,
+            ]);
+
+            // Mettre à jour les images du véhicule
+        if ($request->hasFile('images')) {
+            $images = [];
+            foreach ($request->file('images') as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->move(public_path('images/vehicules'), $imageName);
+                $images[] = 'images/vehicules/' . $imageName;
+            }
+            $appartements->images = implode('|', $images);
+            $appartements->save();
+        }
+
+            // Redirection avec un message de succès
+             return redirect()->route('entreprise.annonce')->with('success', 'Votre annonce a été modifiée avec succès.');
+    
+        } catch (Exception $e) {
+            dd($e);
+
+            // Gérer les erreurs
+            return redirect()->back()->with('error', 'Une erreur est survenue lors du dépôt de votre annonce.');
+        }
+        dd($appartement, $request);
+
     }
 
 }

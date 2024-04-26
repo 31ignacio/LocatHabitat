@@ -29,22 +29,27 @@ class ProfilController extends Controller
 
         //dd($request->all());
         try {
-            $entreprise->id = $request->id;
-            $entreprise->entreprise = $request->entreprise;
-            $entreprise->representant = $request->representant;
-            $entreprise->ville = $request->ville;
-            $entreprise->quatier = $request->quatier;
-            $entreprise->telephone = $request->telephone;
-            $entreprise->description = $request->description;
-
-            //dd($hotel);
-            $entreprise->update();
-            //dd($hotel);
+            // Mise à jour des données de l'entreprise
+            $entreprise->update([
+                'entreprise' => $request->entreprise,
+                'representant' => $request->representant,
+                'ville' => $request->ville,
+                'quatier' => $request->quatier,
+                'telephone' => $request->telephone,
+                'description' => $request->description,
+            ]);
+        
+            // Mise à jour des données de l'utilisateur
+            $user = $entreprise->user;
+            $user->name = $request->entreprise;
+            $user->email = $request->email;
+            $user->save();
+        
             return back()->with('success', 'Votre profil a été modifié avec succès');
-
         } catch (Exception $e) {
             dd($e);
         }
+        
 
 
     }
@@ -93,10 +98,10 @@ class ProfilController extends Controller
             Auth::logout();
 
             // Rediriger vers la page de connexion avec un message de succès
-            return redirect()->route('user.login')->with('success', 'Votre mot de passe a été modifié avec succès. Veuillez vous reconnecter avec le nouveau mot de passe.');
+            return redirect()->route('login')->with('success', 'Votre mot de passe a été modifié avec succès. Veuillez vous reconnecter avec le nouveau mot de passe.');
 
         
-            return redirect()->route('user.login')->with('error','Le mot de passe modifié avec succès. Connectez-vous avec le nouveau mot de passe');
+            return redirect()->route('login')->with('error','Le mot de passe modifié avec succès. Connectez-vous avec le nouveau mot de passe');
         }catch(Exception $e){
             dd($e);
         }

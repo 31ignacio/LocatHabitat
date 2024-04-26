@@ -128,6 +128,7 @@ class VehiculeController extends Controller
     public function vehiculeUpdate(Request $request, $id){
 
         $vehicule = Vehicule::findOrFail($id);
+        //dd($vehicule);
 
         // Valider les données du formulaire
         $validatedData = $request->validate([

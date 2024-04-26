@@ -135,7 +135,7 @@
                             </span>
                             <span class="property-info-entry">
                                 <span class="property-info-label"> Abonnement canal + </span>
-                                {{-- <span class="badge badge-info">{{ $appartements->canal+ }} </span> --}}
+                                <span class="badge badge-info">{{ $appartements->canal }} </span>
                             </span>
                         </div>
 
@@ -449,4 +449,5 @@
     }
 
 </style>
+
 @endsection

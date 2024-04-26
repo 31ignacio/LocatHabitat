@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class InscriptionEntrepriseNotification extends Notification
+class PasswordForgetEntrepriseNotification extends Notification
 {
     use Queueable;
 
@@ -42,15 +42,13 @@ class InscriptionEntrepriseNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Activation de votre compte')
-            ->line('Bienvenue sur notre plateforme !')
+            ->subject('Réinitialisation de votre mot de passe')
             ->line('Bonjour ' . $this->entreprise )
-            ->line('Nous sommes ravis de vous accueillir sur notre plateforme.')
-            ->line(' Pour activer votre compte, veuillez utiliser ce code :' .$this->code)
-            ->line('Ce code d\'activation est confidentiel. Ne le partagez avec personne.')
-            ->line('Merci de rejoindre notre communauté !')
-            ->line('L\'équipe de LocatHabitat')
-            ->action('Activer mon compte', url('/validate-account' . '/' . $this->email));
+            ->line('Vous recevez cet e-mail car vous avez demandé la réinitialisation de votre mot de passe sur notre plateforme.')
+            ->line('Veuillez cliquer sur le lien ci-dessous pour réinitialiser votre mot de passe.')
+            ->action('Réinitialisation mot de passe', url('/validate-mail/' . $this->email . '/' . $this->code))
+            ->line('Cordialement,')
+            ->line('L\'équipe de LocatHabitat');
     }
     
 

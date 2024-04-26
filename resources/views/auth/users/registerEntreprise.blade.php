@@ -118,7 +118,7 @@
                         </div>
                         <br>
                         <div id="emailHelp" class="form-text mb-5 text-dark">
-                            Déjà inscrit ?<a href="{{route('user.login')}}" class="text-dark fw-bold"> Connectez-vous</a>
+                            Déjà inscrit ?<a href="{{route('login')}}" class="text-dark fw-bold"> Connectez-vous</a>
                         </div>
                     </form>
                 </div>
